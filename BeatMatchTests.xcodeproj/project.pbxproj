@@ -38,6 +38,7 @@
 		7486C8D5121C77AF00600D39 /* modern_full.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7486C8D4121C77AF00600D39 /* modern_full.wav */; };
 		7486C909121C7D9C00600D39 /* css.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7486C908121C7D9C00600D39 /* css.wav */; };
 		7486C90F121C7E1400600D39 /* vampire.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7486C90E121C7E1400600D39 /* vampire.wav */; };
+		74E46BFE13213D4800CD578C /* beatdetect.c in Sources */ = {isa = PBXBuildFile; fileRef = 74E46BFD13213D4800CD578C /* beatdetect.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,8 @@
 		7486C8D4121C77AF00600D39 /* modern_full.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = modern_full.wav; sourceTree = "<group>"; };
 		7486C908121C7D9C00600D39 /* css.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = css.wav; sourceTree = "<group>"; };
 		7486C90E121C7E1400600D39 /* vampire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vampire.wav; sourceTree = "<group>"; };
+		74E46BFC13213D4800CD578C /* beatdetect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = beatdetect.h; path = Classes/beatdetect.h; sourceTree = "<group>"; };
+		74E46BFD13213D4800CD578C /* beatdetect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = beatdetect.c; path = Classes/beatdetect.c; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* BeatMatchTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BeatMatchTests-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,6 +184,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				74E46BFC13213D4800CD578C /* beatdetect.h */,
+				74E46BFD13213D4800CD578C /* beatdetect.c */,
 				32CA4F630368D1EE00C91783 /* BeatMatchTests_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -321,6 +326,7 @@
 				7486C676121C2BA300600D39 /* FFTBufferManager.cpp in Sources */,
 				7486C677121C2BA300600D39 /* rad2fft.c in Sources */,
 				7486C678121C2BA300600D39 /* SpectrumAnalysis.cpp in Sources */,
+				74E46BFE13213D4800CD578C /* beatdetect.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
