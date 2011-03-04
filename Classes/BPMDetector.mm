@@ -129,6 +129,7 @@
 	
 	uint32_t sigLength = numSliceSamples;
 	
+	// 100 max beats ?
 	int * beats = (int*)malloc(100 * sizeof(int));
 	
 	int numDetected = 0;
@@ -154,6 +155,43 @@
 	
 	free(signal);
 	free(beats);
+	
+	
+	
+	// this is a rudimentary BPM analyzer looking at the peaks... 
+	// uncomment to see beats in pink it thinks are useful...
+	// it's useless right now because the peaks seem all over the place.
+	
+	/*
+	int currentWindowStart = sliceStartOffset;
+	int windowSize = numSliceSamples;//44100 * 10;
+	int windowIncrement = windowSize;// - (windowSize/10); // a little overlap
+	
+	while (1) {
+		
+		currentBPMSearchWindowStartIndex = currentWindowStart;
+		currentBPMSearchWindowEndIndex = CLAMP(0, currentBPMSearchWindowStartIndex + windowSize , ((sliceStartOffset+numSliceSamples)-1) );
+		
+		[self estimateBPM];
+		
+		if ( currentBPMSearchWindowEndIndex >= ((sliceStartOffset+numSliceSamples)-1) ) {
+			//NSLog(@"finished");
+			break;
+		}
+		
+		currentWindowStart += windowIncrement;
+		
+	}
+	
+	
+	sliceStartOffset += numSliceSamples;
+	int sliceSize = numSliceSamples;
+	
+	if ( (sliceStartOffset + sliceSize) > (numSongSamples-1) ) {
+		NSLog(@"FINISHED SLICES in function");
+		//break;
+	}
+	*/
 	
 }
 
