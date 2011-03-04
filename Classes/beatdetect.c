@@ -44,7 +44,7 @@ int main()
 /**
   * @brief - locates beats in signal
   */
-void BeatDetect(const float signal[], uint32_t signalLength, int *beats, int *num_beats)
+void DoBeatDetect(const float signal[], uint32_t signalLength, int *beats, int *num_beats)
 {
 	//
 	// signal must be > 2048 points!

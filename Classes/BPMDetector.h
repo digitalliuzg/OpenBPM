@@ -12,6 +12,12 @@
 
 //@class FFTBufferManager;
 
+
+typedef enum DetectionMethod {
+	DETECTION_METHOD_CC,
+	DETECTION_METHOD_WILL
+} DetectionMethod;
+
 typedef struct BeatValues {
 	float bassValue;
 	float trebleValue;
@@ -24,6 +30,7 @@ typedef struct DetectedBeat {
 	BOOL active;
 	Float64 distance;
 	float BPM;
+	
 } DetectedBeat;
 
 typedef struct BeatPair {
@@ -39,7 +46,7 @@ typedef struct BeatPair {
 
 @interface BPMDetector : NSObject {
 	
-	
+	DetectionMethod detectionMethod;
 	// FFT
 	int bufSize;
 	int chunkSize;
@@ -73,6 +80,10 @@ typedef struct BeatPair {
 	UInt64 numSongSamples;
 	
 }
+
+// which method to detect with
+@property DetectionMethod detectionMethod;
+
 
 @property int numBeats;
 @property DetectedBeat * detectedBeats;

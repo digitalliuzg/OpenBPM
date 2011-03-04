@@ -14,6 +14,7 @@
 #include <libkern/OSAtomic.h>
 #include <CoreFoundation/CFURL.h>
 
+#import "beatdetect.h"
 
 
 
@@ -35,6 +36,7 @@
 @implementation BPMDetector
 
 @synthesize numBeats , detectedBeats;
+@synthesize detectionMethod;
 
 // TODO: will break with 2 records...
 //static FFTBufferManager * fftBufferManager;
@@ -51,23 +53,17 @@
 		bufSize = 4096; // samples.. not bytes
 		
 		samples32 = nil;
-		
-		/*
-		int sliceStartOffset = 0;
-		int sliceSize = 44100 * 5;
-		int numSliceSamples = sliceSize;
-		int offset = 0;
-		*/
-		
-		//int maxFPS = bSize / (sizeof(int32_t));
-		//int maxFPS = bufSize;
-		
 		fftBufferManager = new FFTBufferManager(bufSize);
-		
-		//fftBufferManagers[0] = new FFTBufferManager(bufSize);
-		//fftBufferManagers[1] = new FFTBufferManager(bufSize);
-		
 		l_fftData = new int32_t[bufSize/2];
+		
+		
+		
+		// 3 hour song at 200 bpm = 3 * 60 * 200
+		// we need to allocate this on the fly... not all right now.. 
+		detectedBeats = (DetectedBeat*)malloc( 50000 * sizeof(DetectedBeat) );
+		memset(detectedBeats,0, 4*beatBufferSize * sizeof(DetectedBeat) );
+		numBeats = 0;
+			
 		
 		
 		
@@ -93,6 +89,8 @@
 	return self;
 }
 
+
+
 -(void) clearBeatData {
 	
 	free(detectedBeats);
@@ -114,6 +112,53 @@
 
 -(void) addSamplesAndDetect:(SInt16*)sampleBuffer numFrames:(int)numSliceSamples atSongOffset:(int)sliceStartOffset {
 
+	switch (detectionMethod) {
+		case DETECTION_METHOD_WILL:
+			[self addSamplesAndDetect_Will:sampleBuffer numFrames:numSliceSamples atSongOffset:sliceStartOffset];
+			break;
+		case DETECTION_METHOD_CC:
+			[self addSamplesAndDetect_CC:sampleBuffer numFrames:numSliceSamples atSongOffset:sliceStartOffset];
+			break;
+		default:
+			break;
+	}
+	
+}
+
+-(void) addSamplesAndDetect_Will:(SInt16*)sampleBuffer numFrames:(int)numSliceSamples atSongOffset:(int)sliceStartOffset {
+	
+	uint32_t sigLength = numSliceSamples;
+	
+	int * beats = (int*)malloc(100 * sizeof(int));
+	
+	int numDetected = 0;
+	
+	float * signal = (float*)malloc(sigLength * sizeof(float));
+	
+	for (int i = 0; i < sigLength; i++) {
+		
+		float sample = sampleBuffer[i]; 
+		signal[i] = sample / 32767.0f;
+		
+	}
+	
+	DoBeatDetect(signal, sigLength, beats, &numDetected);
+	
+	
+	for (int i = 0; i < numDetected; i++) {
+		
+		detectedBeats[numBeats].songSampleIndex = beats[i] + sliceStartOffset;
+		numBeats++;
+		
+	}
+	
+	free(signal);
+	free(beats);
+	
+}
+
+-(void) addSamplesAndDetect_CC:(SInt16*)sampleBuffer numFrames:(int)numSliceSamples atSongOffset:(int)sliceStartOffset {
+	
 	
 	//int sliceStartOffset = 0;
 	
@@ -124,129 +169,119 @@
 	int offset = 0;
 	
 	//while (1) {
+	
+	numSliceSamples = CLAMP(0, sliceSize, (numSongSamples-sliceStartOffset));
+	
+	//NSLog(@"\n\n starting loop.. num slice: %i , offset: %i ", numSliceSamples , sliceStartOffset );
+	
+	if ( !bassBuffer ) {
+		beatBufferSize = numSliceSamples / chunkSize;
+		bassBuffer = (float*)malloc( beatBufferSize * sizeof(float) );
+		trebleBuffer = (float*)malloc( beatBufferSize * sizeof(float) );
+	}
+	
+	memset(bassBuffer,0,beatBufferSize * sizeof(float));
+	
+	offset = 0;//sliceStartOffset;
+	
+	for (int i = 0; i < (numSliceSamples/chunkSize); i++) {
 		
-		numSliceSamples = CLAMP(0, sliceSize, (numSongSamples-sliceStartOffset));
+		BeatValues b = [self detectBeatValues:(sampleBuffer+offset) numFrames:bufSize];
+		offset += chunkSize;
 		
-		//NSLog(@"\n\n starting loop.. num slice: %i , offset: %i ", numSliceSamples , sliceStartOffset );
+		bassBuffer[i] = b.bassValue;
+		trebleBuffer[i] = b.trebleValue;
 		
-		if ( !bassBuffer ) {
-			beatBufferSize = numSliceSamples / chunkSize;
-			bassBuffer = (float*)malloc( beatBufferSize * sizeof(float) );
-			trebleBuffer = (float*)malloc( beatBufferSize * sizeof(float) );
-		}
+	}
+	
+	
+	// a simple peak detection from the FFT data...
+	// this also uses a threshold, which should be replaced with a local energy-based method like that student's paper
+	// this just gives a bunch of points that could be beats, having too many is probably good
+	
+	// it also misses beats that are right on the edge of a buffer...
+	// i guess i have to process windows here too
+	
+	for (int i = 6; i < beatBufferSize-6; i++) {
 		
-		memset(bassBuffer,0,beatBufferSize * sizeof(float));
+		int index = i;
+		int indexGlobal = (sliceStartOffset/chunkSize) + i;
 		
-		offset = 0;//sliceStartOffset;
+		float bval = bassBuffer[index];
 		
-		for (int i = 0; i < (numSliceSamples/chunkSize); i++) {
-			
-			BeatValues b = [self detectBeatValues:(sampleBuffer+offset) numFrames:bufSize];
-			offset += chunkSize;
-			
-			bassBuffer[i] = b.bassValue;
-			trebleBuffer[i] = b.trebleValue;
-			
-		}
+		float bvalL = bassBuffer[index-1];
+		float bvalR = bassBuffer[index+1];
 		
-		if ( !detectedBeats ) {
-			
-			detectedBeats = (DetectedBeat*)malloc( 4*beatBufferSize * sizeof(DetectedBeat) );
-			memset(detectedBeats,0, 4*beatBufferSize * sizeof(DetectedBeat) );
-			numBeats = 0;
-			
-		}
+		float bvalL2 = bassBuffer[index-2];
+		float bvalR2 = bassBuffer[index+2];
 		
+		float bvalL3 = bassBuffer[index-3];
+		float bvalR3 = bassBuffer[index+3];
 		
-		// a simple peak detection from the FFT data...
-		// this also uses a threshold, which should be replaced with a local energy-based method like that student's paper
-		// this just gives a bunch of points that could be beats, having too many is probably good
+		float bvalL4 = bassBuffer[index-4];
+		float bvalR4 = bassBuffer[index+4];
 		
-		// it also misses beats that are right on the edge of a buffer...
-		// i guess i have to process windows here too
+		float bvalL5 = bassBuffer[index-5];
+		float bvalR5 = bassBuffer[index+5];
 		
-		for (int i = 6; i < beatBufferSize-6; i++) {
+		float bvalL6 = bassBuffer[index-6];
+		float bvalR6 = bassBuffer[index+6];
+		
+		if ( bval > 0.6 ) {
 			
-			int index = i;
-			int indexGlobal = (sliceStartOffset/chunkSize) + i;
-			
-			float bval = bassBuffer[index];
-			
-			float bvalL = bassBuffer[index-1];
-			float bvalR = bassBuffer[index+1];
-			
-			float bvalL2 = bassBuffer[index-2];
-			float bvalR2 = bassBuffer[index+2];
-			
-			float bvalL3 = bassBuffer[index-3];
-			float bvalR3 = bassBuffer[index+3];
-			
-			float bvalL4 = bassBuffer[index-4];
-			float bvalR4 = bassBuffer[index+4];
-			
-			float bvalL5 = bassBuffer[index-5];
-			float bvalR5 = bassBuffer[index+5];
-			
-			float bvalL6 = bassBuffer[index-6];
-			float bvalR6 = bassBuffer[index+6];
-			
-			if ( bval > 0.6 ) {
+			if (   (bval > bvalR)  && (bval > bvalL) 
+				&& (bval > bvalR2) && (bval > bvalL2) 
+				&& (bval > bvalR3) && (bval > bvalL3)   
+				&& (bval > bvalR4) && (bval > bvalL4)
+				&& (bval > bvalR5) && (bval > bvalL5)
+				&& (bval > bvalR6) && (bval > bvalL6) 
+				) {
 				
-				if (   (bval > bvalR)  && (bval > bvalL) 
-					&& (bval > bvalR2) && (bval > bvalL2) 
-					&& (bval > bvalR3) && (bval > bvalL3)   
-					&& (bval > bvalR4) && (bval > bvalL4)
-					&& (bval > bvalR5) && (bval > bvalL5)
-					&& (bval > bvalR6) && (bval > bvalL6) 
-					) {
-					
-					// TODO: this is a super simplified guess of where the peak is... 
-					// need some greater guessing about its exact location... may not matter though
-					
-					detectedBeats[numBeats].songSampleIndex = (indexGlobal*chunkSize + (bufSize/2));
-					
-					numBeats++;
-					
-				}
+				// TODO: this is a super simplified guess of where the peak is... 
+				// need some greater guessing about its exact location... may not matter though
+				
+				detectedBeats[numBeats].songSampleIndex = (indexGlobal*chunkSize + (bufSize/2));
+				
+				numBeats++;
 				
 			}
 			
-			
 		}
 		
 		
-		int currentWindowStart = sliceStartOffset;
-		int windowSize = numSliceSamples;//44100 * 10;
-		int windowIncrement = windowSize;// - (windowSize/10); // a little overlap
+	}
+	
+	
+	int currentWindowStart = sliceStartOffset;
+	int windowSize = numSliceSamples;//44100 * 10;
+	int windowIncrement = windowSize;// - (windowSize/10); // a little overlap
+	
+	while (1) {
 		
-		while (1) {
-			
-			currentBPMSearchWindowStartIndex = currentWindowStart;
-			currentBPMSearchWindowEndIndex = CLAMP(0, currentBPMSearchWindowStartIndex + windowSize , ((sliceStartOffset+numSliceSamples)-1) );
-			
-			[self estimateBPM];
-			
-			if ( currentBPMSearchWindowEndIndex >= ((sliceStartOffset+numSliceSamples)-1) ) {
-				//NSLog(@"finished");
-				break;
-			}
-			
-			currentWindowStart += windowIncrement;
-			
+		currentBPMSearchWindowStartIndex = currentWindowStart;
+		currentBPMSearchWindowEndIndex = CLAMP(0, currentBPMSearchWindowStartIndex + windowSize , ((sliceStartOffset+numSliceSamples)-1) );
+		
+		[self estimateBPM];
+		
+		if ( currentBPMSearchWindowEndIndex >= ((sliceStartOffset+numSliceSamples)-1) ) {
+			//NSLog(@"finished");
+			break;
 		}
 		
+		currentWindowStart += windowIncrement;
 		
-		sliceStartOffset += numSliceSamples;
-		
-		if ( (sliceStartOffset + sliceSize) > (numSongSamples-1) ) {
-			NSLog(@"FINISHED SLICES in function");
-			//break;
-		}
-		
-		
+	}
+	
+	
+	sliceStartOffset += numSliceSamples;
+	
+	if ( (sliceStartOffset + sliceSize) > (numSongSamples-1) ) {
+		NSLog(@"FINISHED SLICES in function");
+		//break;
+	}
+	
+	
 	//}
-	
-	
 	
 	
 }
@@ -261,7 +296,8 @@
 	
 	if ( !detectedBeatsInWindow ) {
 		
-		detectedBeatsInWindow = (DetectedBeat**)malloc( numBeats * sizeof(DetectedBeat*) );
+		//detectedBeatsInWindow = (DetectedBeat**)malloc( numBeats * sizeof(DetectedBeat*) );
+		detectedBeatsInWindow = (DetectedBeat**)malloc( 200 * sizeof(DetectedBeat*) );
 		
 	}
 	

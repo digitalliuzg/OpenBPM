@@ -609,9 +609,9 @@ static OSStatus	PerformThru(
     //SAMPLETYPE sampleBuffer[BUFF_SIZE];
 	//SInt16 sampleBuffer[BUFF_SIZE];
 	
-	if ( sampleBuffer != nil ) {
-		free(sampleBuffer);
-	}
+	//if ( sampleBuffer != nil ) {
+	//	free(sampleBuffer);
+	//}
 	
 	
 	
@@ -772,6 +772,7 @@ static OSStatus	PerformThru(
 -(void) doBeatDetect {
 	
 	bpmDetector = [[BPMDetector alloc] initWithSongLength:numSongSamples];
+	bpmDetector.detectionMethod = DETECTION_METHOD_WILL;
 	
 	/*
 	int chunkSize = 512;
