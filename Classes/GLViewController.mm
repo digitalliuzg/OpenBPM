@@ -785,22 +785,6 @@ static OSStatus	PerformThru(
 	int sliceSize = 44100 * 2;
 	int numSliceSamples = sliceSize;
 	//int offset = 0;
-	/*
-	while (1) {
-		
-		numSliceSamples = CLAMP(0, sliceSize, (numSongSamples-sliceStartOffset));
-		
-		[bpmDetector addSamplesAndDetect:(sampleBuffer+sliceStartOffset) numFrames:numSliceSamples atSongOffset:sliceStartOffset];
-		
-		sliceStartOffset += numSliceSamples;
-		
-		if ( (sliceStartOffset + sliceSize) > (numSongSamples-1) ) {
-			NSLog(@"FINISHED Outside");
-			break;
-		}
-		
-	}
-	*/
 	
 	while (1) {
 		

@@ -29,10 +29,10 @@
 	};
 	1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */ = {
 		uiCtxt = {
-			sepNavFolds = "{\n    c =     (\n                {\n            l = \"(NSData *)data\";\n            r = \"{1584, 18}\";\n            s = 1;\n        },\n                {\n            l = \"(NSError **)outError\";\n            r = \"{1609, 24}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 32615}\";\n    s = 0;\n}";
-			sepNavIntBoundsRect = "{{0, 0}, {1224, 18603}}";
-			sepNavSelRange = "{18299, 19}";
-			sepNavVisRange = "{17747, 1061}";
+			sepNavFolds = "{\n    c =     (\n                {\n            l = \"(NSData *)data\";\n            r = \"{1584, 18}\";\n            s = 1;\n        },\n                {\n            l = \"(NSError **)outError\";\n            r = \"{1609, 24}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 32228}\";\n    s = 0;\n}";
+			sepNavIntBoundsRect = "{{0, 0}, {1224, 18343}}";
+			sepNavSelRange = "{2147, 0}";
+			sepNavVisRange = "{1602, 1164}";
 		};
 	};
 	1F92F5EB0FDFF83200548BE8 /* OpenGLCommon.h */ = {
@@ -210,6 +210,10 @@
 			74A12FF91326D5F200D2BBEF /* PBXTextBookmark */ = 74A12FF91326D5F200D2BBEF /* PBXTextBookmark */;
 			74A12FFA1326D5F200D2BBEF /* PBXTextBookmark */ = 74A12FFA1326D5F200D2BBEF /* PBXTextBookmark */;
 			74A12FFB1326D61600D2BBEF /* PBXTextBookmark */ = 74A12FFB1326D61600D2BBEF /* PBXTextBookmark */;
+			74A130001326D6AC00D2BBEF /* PBXTextBookmark */ = 74A130001326D6AC00D2BBEF /* PBXTextBookmark */;
+			74A130011326D6AC00D2BBEF /* PBXTextBookmark */ = 74A130011326D6AC00D2BBEF /* PBXTextBookmark */;
+			74A130021326D6AC00D2BBEF /* PBXTextBookmark */ = 74A130021326D6AC00D2BBEF /* PBXTextBookmark */;
+			74A130031326D6EF00D2BBEF /* PBXTextBookmark */ = 74A130031326D6EF00D2BBEF /* PBXTextBookmark */;
 			74E29D4F12C1237D00FDB951 = 74E29D4F12C1237D00FDB951 /* PlistBookmark */;
 			74E46C401321433E00CD578C = 74E46C401321433E00CD578C /* PBXTextBookmark */;
 			74E46C4B1321463200CD578C = 74E46C4B1321463200CD578C /* PBXTextBookmark */;
@@ -740,8 +744,8 @@
 		isa = PBXTextBookmark;
 		fRef = 1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */;
 		name = "GLViewController.mm: 793";
-		rLen = 19;
-		rLoc = 17914;
+		rLen = 0;
+		rLoc = 17841;
 		rType = 0;
 		vrLen = 955;
 		vrLoc = 17391;
@@ -780,8 +784,8 @@
 		isa = PBXTextBookmark;
 		fRef = 1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */;
 		name = "GLViewController.mm: 793";
-		rLen = 19;
-		rLoc = 17914;
+		rLen = 0;
+		rLoc = 17841;
 		rType = 0;
 		vrLen = 1049;
 		vrLoc = 17424;
@@ -941,8 +945,8 @@
 		isa = PBXTextBookmark;
 		fRef = 1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */;
 		name = "GLViewController.mm: 793";
-		rLen = 19;
-		rLoc = 17914;
+		rLen = 0;
+		rLoc = 17841;
 		rType = 0;
 		vrLen = 1015;
 		vrLoc = 17424;
@@ -1077,8 +1081,8 @@
 		isa = PBXTextBookmark;
 		fRef = 1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */;
 		name = "GLViewController.mm: 791";
-		rLen = 19;
-		rLoc = 17914;
+		rLen = 0;
+		rLoc = 17841;
 		rType = 0;
 		vrLen = 988;
 		vrLoc = 17463;
@@ -1107,8 +1111,8 @@
 		isa = PBXTextBookmark;
 		fRef = 1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */;
 		name = "GLViewController.mm: 793";
-		rLen = 19;
-		rLoc = 17914;
+		rLen = 0;
+		rLoc = 17841;
 		rType = 0;
 		vrLen = 1044;
 		vrLoc = 17448;
@@ -1219,7 +1223,7 @@
 		fRef = 1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */;
 		name = "GLViewController.mm: 818";
 		rLen = 0;
-		rLoc = 18614;
+		rLoc = 18227;
 		rType = 0;
 		vrLen = 1032;
 		vrLoc = 17787;
@@ -1229,7 +1233,7 @@
 		fRef = 1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */;
 		name = "GLViewController.mm: 809";
 		rLen = 19;
-		rLoc = 18299;
+		rLoc = 17912;
 		rType = 0;
 		vrLen = 1061;
 		vrLoc = 17747;
@@ -1274,6 +1278,46 @@
 		vrLen = 909;
 		vrLoc = 2863;
 	};
+	74A130001326D6AC00D2BBEF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
+		name = "beatdetect.c: 157";
+		rLen = 0;
+		rLoc = 3715;
+		rType = 0;
+		vrLen = 935;
+		vrLoc = 2867;
+	};
+	74A130011326D6AC00D2BBEF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */;
+		name = "GLViewController.mm: 807";
+		rLen = 19;
+		rLoc = 17912;
+		rType = 0;
+		vrLen = 1060;
+		vrLoc = 17759;
+	};
+	74A130021326D6AC00D2BBEF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */;
+		name = "GLViewController.mm: 102";
+		rLen = 0;
+		rLoc = 2187;
+		rType = 0;
+		vrLen = 1158;
+		vrLoc = 1642;
+	};
+	74A130031326D6EF00D2BBEF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1F92F5EA0FDFF83200548BE8 /* GLViewController.mm */;
+		name = "GLViewController.mm: 102";
+		rLen = 0;
+		rLoc = 2187;
+		rType = 0;
+		vrLen = 1164;
+		vrLoc = 1642;
+	};
 	74E29D4F12C1237D00FDB951 /* PlistBookmark */ = {
 		isa = PlistBookmark;
 		fRef = 8D1107310486CEB800E47090 /* BeatMatchTests-Info.plist */;
@@ -1295,9 +1339,9 @@
 	};
 	74E46BFD13213D4800CD578C /* beatdetect.c */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1224, 2561}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1224, 2574}}";
 			sepNavSelRange = "{3715, 0}";
-			sepNavVisRange = "{2863, 909}";
+			sepNavVisRange = "{2867, 935}";
 		};
 	};
 	74E46C401321433E00CD578C /* PBXTextBookmark */ = {
