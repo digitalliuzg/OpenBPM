@@ -44,7 +44,7 @@ int main()
 /**
   * @brief - locates beats in signal
   */
-void DoBeatDetect(const float signal[], uint32_t signalLength, int *beats, int *num_beats)
+void DoBeatDetect(float signal[], uint32_t signalLength, int *beats, int *num_beats)
 {
 	//
 	// signal must be > 2048 points!
@@ -65,6 +65,7 @@ void DoBeatDetect(const float signal[], uint32_t signalLength, int *beats, int *
 	resultLength = signalLength;
 	
 	result = (float *) malloc(resultLength * sizeof(float));
+	memset(result, 0 , resultLength * sizeof(float));
 	indicies = (vDSP_Length *)malloc(resultLength * sizeof(vDSP_Length));
 
 	if (signal == NULL || result == NULL || indicies == NULL) {
@@ -90,7 +91,10 @@ void DoBeatDetect(const float signal[], uint32_t signalLength, int *beats, int *
 	//
 	// 3: half-wave rectify signal
 	//
-	vDSP_vthr(result,resultStride,zeros,result,resultStride,resultLength);
+	//--vDSP_vthr(result,resultStride,zeros,result,resultStride,resultLength);
+	float zero = 0.0f;
+	
+	vDSP_vthr(result,resultStride,&zero,result,resultStride,resultLength);
 	
 //	for(i=0; i<resultLength; i++)
 //		printf("%f\n",result[i]);
@@ -101,28 +105,36 @@ void DoBeatDetect(const float signal[], uint32_t signalLength, int *beats, int *
 	numPeaks = 30;
 	
 	peaks = (float *) malloc(numPeaks * sizeof(float));
+	memset(peaks,0,numPeaks * sizeof(float));
 	
 	//	
 	// 4: locate peaks
 	//
 
 	// get the X largest values
-	vDSP_vsorti(result, indicies, NULL, resultLength, ASCENDING);
+	//vDSP_vsorti(result, indicies, NULL, resultLength, ASCENDING);
+	vDSP_vsorti(result, indicies, NULL, resultLength, DESCENDING);
 	for(i=0; i<numPeaks; i++)
 	{
 		peaks[i] = (float)indicies[i];	// do some kind of vector copy?
 	}
+	
+	//for(i=0; i<numPeaks; i++)
+	//	printf("%d\n",(int)peaks[i]);
 
-	vDSP_vsort(peaks, numPeaks, ASCENDING);
+	vDSP_vsort(peaks, numPeaks, DESCENDING);
 
-//	for(i=0; i<numPeaks; i++)
-//		printf("%d\n",(int)peaks[i]);
+	//for(i=0; i<numPeaks; i++)
+	//	printf("%d\n",(int)peaks[i]);
+	
+	//printf("----\n");
 	
 	//
 	// 5: smooth result?
 	// 6: get beat markers
 	//
 	
+	/*
 	// cluster the peaks to get beats
 	j = numBeats = 0;
 	for(i=0; i<numPeaks; i++)
@@ -134,7 +146,16 @@ void DoBeatDetect(const float signal[], uint32_t signalLength, int *beats, int *
 			j = i + 1;
 		}
 	}
-
+	*/
+	 
+	numBeats = 0;
+	
+	for(i=0; i<numPeaks; i++)
+	{
+		beats[numBeats++] = peaks[i];
+	}
+	
+	
 //	printf("\nbeats:\n");
 //	for(i=0; i<numBeats; i++)
 //		printf("%d\n",beats[i]);
@@ -151,7 +172,7 @@ void DoBeatDetect(const float signal[], uint32_t signalLength, int *beats, int *
 /**
   * @brief - calculates mean & variance (1st & 2nd moments) of data vector 
   */
-void GetMoments(const float data[], int length, float *mean, float *var)
+void GetMoments(float data[], int length, float *mean, float *var)
 {	
 	int i, acc;
 	i = acc = 0;

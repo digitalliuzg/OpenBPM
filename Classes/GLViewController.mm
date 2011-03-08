@@ -99,7 +99,7 @@ static OSStatus	PerformThru(
 	
 	// test different songs here....
 	// or put in your own
-	NSString * path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"modern.wav"];
+	NSString * path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"modern2.wav"];
 	//NSString * path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"css.wav"];
 	//NSString * path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"vampire.wav"];
 	
@@ -782,10 +782,10 @@ static OSStatus	PerformThru(
 	*/
 	
 	int sliceStartOffset = 0;
-	int sliceSize = 44100 * 5;
+	int sliceSize = 44100 * 2;
 	int numSliceSamples = sliceSize;
 	//int offset = 0;
-	
+	/*
 	while (1) {
 		
 		numSliceSamples = CLAMP(0, sliceSize, (numSongSamples-sliceStartOffset));
@@ -799,6 +799,23 @@ static OSStatus	PerformThru(
 			break;
 		}
 		
+	}
+	*/
+	
+	while (1) {
+		
+		numSliceSamples = CLAMP(0, sliceSize, (numSongSamples-sliceStartOffset));
+		
+		[bpmDetector addSamplesAndDetect:(sampleBuffer+sliceStartOffset) numFrames:numSliceSamples atSongOffset:sliceStartOffset];
+		
+		
+		
+		if ( (sliceStartOffset + numSliceSamples) >= (numSongSamples-1) ) {
+			NSLog(@"FINISHED Outside");
+			break;
+		}
+		
+		sliceStartOffset += numSliceSamples;
 	}
 	
 	

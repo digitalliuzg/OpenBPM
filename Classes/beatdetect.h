@@ -30,8 +30,8 @@ static float zeros[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 };
 
 
-void DoBeatDetect(const float signal[], uint32_t signalLength, int beats[], int *num_beats);
-void GetMoments(const float data[], int length, float *mean, float *var);
+void DoBeatDetect(float signal[], uint32_t signalLength, int beats[], int *num_beats);
+void GetMoments(float data[], int length, float *mean, float *var);
 
 #ifdef __cplusplus
 }
