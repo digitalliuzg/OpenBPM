@@ -93,6 +93,8 @@ typedef struct BeatPair {
 - (id) initWithSongLength:(UInt64) songLen;
 - (void) addSamplesAndDetect:(SInt16*)sampleBuffer numFrames:(int)numSliceSamples atSongOffset:(int)sliceStartOffset;
 
+-(void) addSamplesAndDetect_Will:(SInt16*)sampleBuffer numFrames:(int)numSliceSamples atSongOffset:(int)sliceStartOffset;
+-(void) addSamplesAndDetect_CC:(SInt16*)sampleBuffer numFrames:(int)numSliceSamples atSongOffset:(int)sliceStartOffset;
 
 -(void) detectAtPath:(NSString*)path;
 

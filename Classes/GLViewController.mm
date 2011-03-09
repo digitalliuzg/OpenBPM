@@ -99,8 +99,8 @@ static OSStatus	PerformThru(
 	
 	// test different songs here....
 	// or put in your own
-	NSString * path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"modern2.wav"];
-	//NSString * path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"css.wav"];
+	//NSString * path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"modern2.wav"];
+	NSString * path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"modern.wav"];
 	//NSString * path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"vampire.wav"];
 	
 	[self loadFileAtPath:path];
@@ -799,7 +799,7 @@ static OSStatus	PerformThru(
 			break;
 		}
 		
-		sliceStartOffset += numSliceSamples;
+		sliceStartOffset += numSliceSamples / 2;	// window with 50% overlap
 	}
 	
 	
