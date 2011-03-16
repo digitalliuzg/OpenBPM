@@ -79,10 +79,11 @@ static OSStatus	PerformThru(
 	texWidth = 320;
 	texHeight = 480;
 	
-	playSpeed = 1.0;
+	playSpeed = 0.8;
 	playPointer = 0.0;
 	
-	follow = YES;
+	//follow = YES;
+	viewMode = VIEW_MODE_CENTERED;
 	
 	[self initAudio];
 	
@@ -123,9 +124,42 @@ static OSStatus	PerformThru(
 	});
 	
 	
+
+	
+	UIButton * syncButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	syncButton.frame = CGRectMake(20, 20, 70, 30);
+	[syncButton setTitle:@"Center" forState:UIControlStateNormal];
+	[syncButton addTarget:self action:@selector(centerClicked) forControlEvents:UIControlEventTouchDown];
+	[self.view addSubview:syncButton];
+	
+	
+	UIButton * followButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	followButton.frame = CGRectMake(95, 20, 70, 30);
+	[followButton setTitle:@"Follow" forState:UIControlStateNormal];
+	[followButton addTarget:self action:@selector(followClicked) forControlEvents:UIControlEventTouchDown];
+	[self.view addSubview:followButton];
+	
+	
 	
 	
 }	
+
+#pragma mark -
+#pragma mark buttons
+
+-(void) followClicked {
+	
+	viewMode = VIEW_MODE_FOLLOW;
+	startingIndex = playPointer - 44100*3;
+	endingIndex = playPointer + 44100*3;
+	startingIndex = CLAMP( 0 , startingIndex, numSongSamples );
+	endingIndex = CLAMP( 0 , endingIndex, numSongSamples );
+	
+}
+
+-(void) centerClicked {
+	viewMode = VIEW_MODE_CENTERED;
+}
 
 -(void) initAudio {
 	
@@ -285,9 +319,27 @@ static OSStatus	PerformThru(
 
 	Float64 pt = (playPointer-startingIndex) / ((float)(endingIndex - startingIndex)) * 480.0;
 	
-	glColor4f(0.0, 1.0, 0.0, 0.0);
 	
-	glDrawLine(0, pt, 320, pt);
+	if ( viewMode == VIEW_MODE_CENTERED ) {
+		
+		startingIndex = playPointer - 44100*3;
+		endingIndex = playPointer + 44100*3;
+		startingIndex = CLAMP( 0 , startingIndex, numSongSamples );
+		endingIndex = CLAMP( 0 , endingIndex, numSongSamples );
+		
+		pt = 240.0;
+		
+	} else if ( viewMode == VIEW_MODE_FOLLOW && pt > 480.0 ) { 
+		
+		int total = (endingIndex-startingIndex);
+		startingIndex += total;
+		endingIndex += total;
+		startingIndex = CLAMP( 0 , startingIndex, numSongSamples );
+		endingIndex = CLAMP( 0 , endingIndex, numSongSamples );
+		
+	}
+	
+	
 	
 	
 	int startingBeatIndex;
@@ -370,8 +422,8 @@ static OSStatus	PerformThru(
 					counter++;
 					
 				} else {
-					glColor4f(0.0, 0.4, 0.2, 1);
-					glDrawLine(0, yVal, 320, yVal);
+					//glColor4f(0.0, 0.4, 0.2, 1);
+					//glDrawLine(0, yVal, 320, yVal);
 				}
 				
 			}
@@ -382,6 +434,15 @@ static OSStatus	PerformThru(
 	}
 	
 	
+	glColor4f(0.0, 1.0, 0.0, 0.0);
+	
+	glDrawLine(0, pt, 320, pt);
+	
+	
+	[self redrawTextureAndUpdate];
+
+	
+	/*
 	if ( follow && pt > 480.0 ) {
 		
 		int total = (endingIndex-startingIndex);
@@ -403,7 +464,7 @@ static OSStatus	PerformThru(
 		
 	}
 	
-	
+	*/
 	
     
 }
@@ -481,8 +542,10 @@ static OSStatus	PerformThru(
 
 -(void) drawZoomedBufferIntoTexture {
 	
+	UInt64 startmod = startingIndex - (startingIndex % 10);
+	UInt64 endmod = endingIndex - (endingIndex % 10);
 	
-	for (int yy = startingIndex; yy < endingIndex; yy+=10) {
+	for (int yy = startmod; yy < endmod; yy+=10) {
 		
 		int x, y ;
 		
@@ -1267,6 +1330,10 @@ static OSStatus	PerformThru(
 
 - (IBAction)handlePinchGesture:(UIGestureRecognizer *)sender {
 	
+	if ( viewMode == VIEW_MODE_CENTERED ) 
+	viewMode = VIEW_MODE_NORMAL;
+	
+	
 	static int centerIndex = 0;
 	static int startingTotal = 0;
 	
@@ -1297,6 +1364,9 @@ static OSStatus	PerformThru(
 }
 
 - (IBAction)handlePanGesture:(UIPanGestureRecognizer *)sender {
+	
+	if ( viewMode == VIEW_MODE_CENTERED ) 
+	viewMode = VIEW_MODE_NORMAL;
 	
 	static int tstartingIndex = 0;
 	static int tendingIndex = 0;
@@ -1338,6 +1408,9 @@ static OSStatus	PerformThru(
 - (IBAction)handleSingleDoubleTap:(UIGestureRecognizer *)sender {
     
 	//CGPoint tapPoint = [sender locationInView:sender.view.superview];
+
+	if ( viewMode == VIEW_MODE_CENTERED ) 
+	viewMode = VIEW_MODE_NORMAL;
 	
 	startingIndex = 0;
 	endingIndex = numSongSamples;
