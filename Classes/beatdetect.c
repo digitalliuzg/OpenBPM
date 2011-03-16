@@ -114,12 +114,6 @@ void DoBeatDetect(float signal[], uint32_t signalLength, int *beats, int *num_be
 //		printf("%f\n",result[i]);
 //	exit(0);
 	
-	float *peaks, mean;
-	int numPeaks, numBeats;
-	numPeaks = 50;
-	
-	peaks = (float *) malloc(numPeaks * sizeof(float));
-	memset(peaks,0,numPeaks * sizeof(float));
 	
 	vDSP_vthr(result,resultStride,&zero,result,resultStride,resultLength);
 				

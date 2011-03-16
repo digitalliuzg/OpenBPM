@@ -16,7 +16,8 @@
 
 #import "beatdetect.h"
 
-
+#include <mach/machine.h>
+#import <mach/mach_time.h>
 
 #define BUFF_SIZE           2048
 
@@ -136,6 +137,7 @@
 	
 	float * signal = (float*)malloc(sigLength * sizeof(float));
 	
+	
 	for (int i = 0; i < sigLength; i++) {
 		
 		float sample = sampleBuffer[i]; 
@@ -143,7 +145,26 @@
 		
 	}
 	
+	
+	// testing how fast a memcpy is
+	//memcpy(signal , sampleBuffer , sigLength * sizeof(float) );
+	
+	
+	UInt64 startT = mach_absolute_time();
+	
 	DoBeatDetect(signal, sigLength, beats, &numDetected);
+	
+	UInt64 deltaT = mach_absolute_time() - startT;
+	
+	int * bpm;
+	
+	UInt64 startT2 = mach_absolute_time();
+	
+	//CombFilterbank(signal, sigLength, bpm);
+	
+	UInt64 deltaT2 = mach_absolute_time() - startT2;
+	
+	//--NSLog(@"Time for Beat Detect: %llu , time for Comb: %llu ", deltaT , deltaT2 );
 	
 	
 	for (int i = 0; i < numDetected; i++) {
@@ -162,7 +183,7 @@
 	// uncomment to see beats in pink it thinks are useful...
 	// it's useless right now because the peaks seem all over the place.
 	
-	
+	/*
 	int currentWindowStart = sliceStartOffset;
 	int windowSize = numSliceSamples;//44100 * 10;
 	int windowIncrement = windowSize;// - (windowSize/10); // a little overlap
@@ -191,7 +212,7 @@
 		NSLog(@"FINISHED SLICES in function");
 		//break;
 	}
-	
+	*/
 	
 }
 

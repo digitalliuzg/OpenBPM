@@ -163,6 +163,9 @@ static OSStatus	PerformThru(
 
 -(void) initAudio {
 	
+	// turn off audio...
+	//return;
+	
 	
 	NSError *error;
 	if (![[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error])
@@ -305,6 +308,10 @@ static OSStatus	PerformThru(
 
 - (void)drawView:(UIView *)theView
 {
+	
+	// stop drawing stuff..
+	//return;
+	
     glColor4f(0.0, 0.0, 0.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
@@ -422,8 +429,8 @@ static OSStatus	PerformThru(
 					counter++;
 					
 				} else {
-					//glColor4f(0.0, 0.4, 0.2, 1);
-					//glDrawLine(0, yVal, 320, yVal);
+					glColor4f(0.0, 0.4, 0.2, 1);
+					glDrawLine(0, yVal, 320, yVal);
 				}
 				
 			}
@@ -848,6 +855,7 @@ static OSStatus	PerformThru(
 	int sliceSize = 44100 * 2;
 	int numSliceSamples = sliceSize;
 	//int offset = 0;
+	NSLog(@"starting");
 	
 	while (1) {
 		
