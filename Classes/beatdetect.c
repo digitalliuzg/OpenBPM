@@ -156,6 +156,44 @@ void DoBeatDetect(float signal[], uint32_t signalLength, int *beats, int *num_be
 }
 
 /**
+  * @brief - comb filterbank
+  */
+void CombFilterbank(const float signal[], uint32_t signalLength, int *bpm)
+{
+	static int Fs = 44100;
+	static int taps = 3;
+	float energy;
+	int N = (int)signalLength;
+	
+	float minbpm = 220.0;	// experimental BPM value
+	int M = floorf((float)(60.0/minbpm*(float)Fs));
+
+	float *temp;	// buffer for goodies
+	int tempLength = 2*M + signalLength - 1;
+
+	temp = (float *) malloc(tempLength * sizeof(float));
+
+	//y_n = x_n , 0 < n < N
+	memcpy(temp, signal, N * sizeof(float));
+	
+	//y_n = x_n-2M , N < n < 2M+N
+	memcpy(temp+N, signal+N-2*M, 2*M * sizeof(float));
+	
+	// y_n = y_n + x_n-M , M < n < M+N
+	vDSP_vadd(temp+M, (vDSP_Stride)1, signal, (vDSP_Stride)1, temp+M, (vDSP_Stride)1, N);
+	
+	// y_n = y_n + x_n-2M , 2M < n < N
+	vDSP_vadd(temp+2*M, (vDSP_Stride)1, signal, (vDSP_Stride)1, temp+2*M, (vDSP_Stride)1, N-2*M);
+	
+	vDSP_dotpr(temp, (vDSP_Stride)1, temp, (vDSP_Stride)1, &energy, tempLength);
+		
+
+	free(temp);
+
+	return;
+}
+
+/**
   * @brief - calculates mean & variance (1st & 2nd moments) of data vector 
   */
 void GetMoments(float data[], int length, float *mean, float *var)

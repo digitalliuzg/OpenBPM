@@ -42,6 +42,7 @@ static float decimFilter[] = {-0.001699407966943429,8.809462949473112e-05,0.0029
 #endif
 	
 void DoBeatDetect(float signal[], uint32_t signalLength, int beats[], int *num_beats);
+void CombFilterbank(const float signal[], uint32_t signalLength, int *bpm);
 void GetMoments(float data[], int length, float *mean, float *var);
 
 #ifdef __cplusplus
