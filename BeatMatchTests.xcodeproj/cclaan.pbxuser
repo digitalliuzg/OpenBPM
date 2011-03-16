@@ -161,6 +161,12 @@
 			743F75891331310400B5BC21 /* PBXTextBookmark */ = 743F75891331310400B5BC21 /* PBXTextBookmark */;
 			743F758A1331310400B5BC21 /* PBXTextBookmark */ = 743F758A1331310400B5BC21 /* PBXTextBookmark */;
 			743F758B1331310400B5BC21 /* PBXTextBookmark */ = 743F758B1331310400B5BC21 /* PBXTextBookmark */;
+			743F759213314B0700B5BC21 /* PBXTextBookmark */ = 743F759213314B0700B5BC21 /* PBXTextBookmark */;
+			743F759413314B0700B5BC21 /* PBXTextBookmark */ = 743F759413314B0700B5BC21 /* PBXTextBookmark */;
+			743F759513314B0700B5BC21 /* PBXTextBookmark */ = 743F759513314B0700B5BC21 /* PBXTextBookmark */;
+			743F759613314B0700B5BC21 /* PBXTextBookmark */ = 743F759613314B0700B5BC21 /* PBXTextBookmark */;
+			743F759713314B0700B5BC21 /* PBXTextBookmark */ = 743F759713314B0700B5BC21 /* PBXTextBookmark */;
+			743F759E13314D1700B5BC21 /* PBXTextBookmark */ = 743F759E13314D1700B5BC21 /* PBXTextBookmark */;
 			7486C59A121B3EA800600D39 = 7486C59A121B3EA800600D39 /* PBXTextBookmark */;
 			7486C59E121B3EA800600D39 = 7486C59E121B3EA800600D39 /* PBXTextBookmark */;
 			7486C5F9121B463100600D39 = 7486C5F9121B463100600D39 /* PBXTextBookmark */;
@@ -473,7 +479,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 194";
 		rLen = 0;
-		rLoc = 4561;
+		rLoc = 4871;
 		rType = 0;
 		vrLen = 1012;
 		vrLoc = 3222;
@@ -523,7 +529,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 146";
 		rLen = 12;
-		rLoc = 3064;
+		rLoc = 3356;
 		rType = 0;
 		vrLen = 743;
 		vrLoc = 2420;
@@ -533,7 +539,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 145";
 		rLen = 0;
-		rLoc = 3062;
+		rLoc = 3354;
 		rType = 0;
 		vrLen = 734;
 		vrLoc = 2420;
@@ -543,7 +549,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 19";
 		rLen = 0;
-		rLoc = 320;
+		rLoc = 356;
 		rType = 0;
 		vrLen = 719;
 		vrLoc = 3;
@@ -553,7 +559,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 155";
 		rLen = 0;
-		rLoc = 3229;
+		rLoc = 3521;
 		rType = 0;
 		vrLen = 801;
 		vrLoc = 2879;
@@ -563,7 +569,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 159";
 		rLen = 0;
-		rLoc = 3384;
+		rLoc = 3676;
 		rType = 0;
 		vrLen = 816;
 		vrLoc = 2912;
@@ -573,7 +579,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 19";
 		rLen = 0;
-		rLoc = 320;
+		rLoc = 356;
 		rType = 0;
 		vrLen = 717;
 		vrLoc = 3;
@@ -583,7 +589,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 155";
 		rLen = 0;
-		rLoc = 3223;
+		rLoc = 3515;
 		rType = 0;
 		vrLen = 757;
 		vrLoc = 2713;
@@ -593,7 +599,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 158";
 		rLen = 0;
-		rLoc = 3270;
+		rLoc = 3562;
 		rType = 0;
 		vrLen = 761;
 		vrLoc = 2713;
@@ -603,7 +609,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 159";
 		rLen = 0;
-		rLoc = 3292;
+		rLoc = 3584;
 		rType = 0;
 		vrLen = 635;
 		vrLoc = 1672;
@@ -653,7 +659,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 159";
 		rLen = 0;
-		rLoc = 3292;
+		rLoc = 3584;
 		rType = 0;
 		vrLen = 635;
 		vrLoc = 1672;
@@ -663,7 +669,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 161";
 		rLen = 0;
-		rLoc = 3328;
+		rLoc = 3620;
 		rType = 0;
 		vrLen = 853;
 		vrLoc = 2916;
@@ -673,7 +679,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 161";
 		rLen = 0;
-		rLoc = 3328;
+		rLoc = 3620;
 		rType = 0;
 		vrLen = 894;
 		vrLoc = 2957;
@@ -683,7 +689,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 166";
 		rLen = 0;
-		rLoc = 3465;
+		rLoc = 3757;
 		rType = 0;
 		vrLen = 910;
 		vrLoc = 2957;
@@ -693,7 +699,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 167";
 		rLen = 0;
-		rLoc = 3409;
+		rLoc = 3701;
 		rType = 0;
 		vrLen = 859;
 		vrLoc = 3018;
@@ -703,7 +709,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 147";
 		rLen = 0;
-		rLoc = 2919;
+		rLoc = 3211;
 		rType = 0;
 		vrLen = 832;
 		vrLoc = 2713;
@@ -713,7 +719,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 167";
 		rLen = 0;
-		rLoc = 3409;
+		rLoc = 3701;
 		rType = 0;
 		vrLen = 774;
 		vrLoc = 2641;
@@ -723,7 +729,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 147";
 		rLen = 0;
-		rLoc = 2919;
+		rLoc = 3211;
 		rType = 0;
 		vrLen = 772;
 		vrLoc = 2641;
@@ -733,7 +739,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 163";
 		rLen = 0;
-		rLoc = 3229;
+		rLoc = 3521;
 		rType = 0;
 		vrLen = 752;
 		vrLoc = 2798;
@@ -743,7 +749,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 163";
 		rLen = 0;
-		rLoc = 3229;
+		rLoc = 3521;
 		rType = 0;
 		vrLen = 752;
 		vrLoc = 2798;
@@ -774,7 +780,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 167;
+		rLoc = 183;
 		rType = 1;
 	};
 	743F7586133130FD00B5BC21 /* PBXTextBookmark */ = {
@@ -782,7 +788,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 168";
 		rLen = 0;
-		rLoc = 3409;
+		rLoc = 3701;
 		rType = 0;
 		vrLen = 365;
 		vrLoc = 3184;
@@ -802,7 +808,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 163";
 		rLen = 0;
-		rLoc = 3229;
+		rLoc = 3521;
 		rType = 0;
 		vrLen = 815;
 		vrLoc = 2737;
@@ -812,10 +818,76 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 146";
 		rLen = 0;
-		rLoc = 2917;
+		rLoc = 2955;
 		rType = 0;
 		vrLen = 674;
 		vrLoc = 2912;
+	};
+	743F759213314B0700B5BC21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 743F759313314B0700B5BC21 /* vDSP.h */;
+		name = "vDSP.h: 60";
+		rLen = 53;
+		rLoc = 1272;
+		rType = 0;
+		vrLen = 1093;
+		vrLoc = 849;
+	};
+	743F759313314B0700B5BC21 /* vDSP.h */ = {
+		isa = PBXFileReference;
+		name = vDSP.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/Accelerate.framework/Frameworks/vecLib.framework/Headers/vDSP.h;
+		sourceTree = "<absolute>";
+	};
+	743F759413314B0700B5BC21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 74E46BFC13213D4800CD578C /* beatdetect.h */;
+		name = "beatdetect.h: 52";
+		rLen = 0;
+		rLoc = 3043;
+		rType = 0;
+		vrLen = 2760;
+		vrLoc = 283;
+	};
+	743F759513314B0700B5BC21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
+		name = "beatdetect.c: 9";
+		rLen = 34;
+		rLoc = 465;
+		rType = 0;
+		vrLen = 1135;
+		vrLoc = 0;
+	};
+	743F759613314B0700B5BC21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
+		name = "BPMDetector.mm: 153";
+		rLen = 0;
+		rLoc = 3095;
+		rType = 0;
+		vrLen = 739;
+		vrLoc = 2843;
+	};
+	743F759713314B0700B5BC21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
+		name = "BPMDetector.mm: 18";
+		rLen = 0;
+		rLoc = 331;
+		rType = 0;
+		vrLen = 861;
+		vrLoc = 2960;
+	};
+	743F759E13314D1700B5BC21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
+		name = "BPMDetector.mm: 223";
+		rLen = 0;
+		rLoc = 4676;
+		rType = 0;
+		vrLen = 818;
+		vrLoc = 3183;
 	};
 	7486C3A0121B175000600D39 /* BeatMatchTests */ = {
 		isa = PBXExecutable;
@@ -874,9 +946,9 @@
 	};
 	7486C3DC121B1C6F00600D39 /* BPMDetector.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1037, 13910}}";
-			sepNavSelRange = "{2917, 0}";
-			sepNavVisRange = "{2912, 674}";
+			sepNavIntBoundsRect = "{{0, 0}, {1037, 14599}}";
+			sepNavSelRange = "{4676, 0}";
+			sepNavVisRange = "{3183, 818}";
 			sepNavWindowFrame = "{{0, 69}, {1440, 809}}";
 		};
 	};
@@ -1134,7 +1206,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 163";
 		rLen = 0;
-		rLoc = 3737;
+		rLoc = 4000;
 		rType = 0;
 		vrLen = 1232;
 		vrLoc = 2825;
@@ -1144,7 +1216,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 163";
 		rLen = 0;
-		rLoc = 3737;
+		rLoc = 4000;
 		rType = 0;
 		vrLen = 1246;
 		vrLoc = 2825;
@@ -1232,7 +1304,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 146";
 		rLen = 12;
-		rLoc = 3064;
+		rLoc = 3356;
 		rType = 0;
 		vrLen = 1256;
 		vrLoc = 2422;
@@ -1280,9 +1352,9 @@
 		fRef = 74E46BFC13213D4800CD578C /* beatdetect.h */;
 		name = "beatdetect.h: 34";
 		rLen = 0;
-		rLoc = 48540;
+		rLoc = 3043;
 		rType = 0;
-		vrLen = 48628;
+		vrLen = 3043;
 		vrLoc = 0;
 	};
 	74A12F831326CC9B00D2BBEF /* PBXTextBookmark */ = {
@@ -1320,7 +1392,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 113";
 		rLen = 118;
-		rLoc = 2015;
+		rLoc = 2051;
 		rType = 0;
 		vrLen = 1023;
 		vrLoc = 1723;
@@ -1379,7 +1451,7 @@
 		isa = PBXTextBookmark;
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		rLen = 1;
-		rLoc = 128;
+		rLoc = 130;
 		rType = 1;
 	};
 	74A12F951326CD6400D2BBEF /* PBXTextBookmark */ = {
@@ -1387,7 +1459,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 142";
 		rLen = 0;
-		rLoc = 2899;
+		rLoc = 2937;
 		rType = 0;
 		vrLen = 1090;
 		vrLoc = 2255;
@@ -1397,7 +1469,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 144";
 		rLen = 0;
-		rLoc = 2917;
+		rLoc = 2955;
 		rType = 0;
 		vrLen = 1211;
 		vrLoc = 2255;
@@ -1407,7 +1479,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 144";
 		rLen = 0;
-		rLoc = 2917;
+		rLoc = 2955;
 		rType = 0;
 		vrLen = 1080;
 		vrLoc = 2386;
@@ -1427,7 +1499,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 144";
 		rLen = 0;
-		rLoc = 2917;
+		rLoc = 2955;
 		rType = 0;
 		vrLen = 1080;
 		vrLoc = 2386;
@@ -1457,7 +1529,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 146";
 		rLen = 0;
-		rLoc = 3063;
+		rLoc = 3355;
 		rType = 0;
 		vrLen = 1231;
 		vrLoc = 2591;
@@ -1484,7 +1556,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 146";
 		rLen = 0;
-		rLoc = 3063;
+		rLoc = 3355;
 		rType = 0;
 		vrLen = 1231;
 		vrLoc = 2591;
@@ -1541,7 +1613,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 113";
 		rLen = 118;
-		rLoc = 2015;
+		rLoc = 2051;
 		rType = 0;
 		vrLen = 1185;
 		vrLoc = 2283;
@@ -1571,9 +1643,9 @@
 		fRef = 74E46BFC13213D4800CD578C /* beatdetect.h */;
 		name = "beatdetect.h: 28";
 		rLen = 0;
-		rLoc = 44311;
+		rLoc = 3043;
 		rType = 0;
-		vrLen = 48628;
+		vrLen = 3043;
 		vrLoc = 0;
 	};
 	74A12FC81326D1CD00D2BBEF /* PBXTextBookmark */ = {
@@ -1617,10 +1689,10 @@
 		isa = PBXTextBookmark;
 		fRef = 74E46BFC13213D4800CD578C /* beatdetect.h */;
 		name = "beatdetect.h: 29";
-		rLen = 5;
-		rLoc = 44325;
+		rLen = 0;
+		rLoc = 3043;
 		rType = 0;
-		vrLen = 48628;
+		vrLen = 3043;
 		vrLoc = 0;
 	};
 	74A12FD11326D21500D2BBEF /* PBXTextBookmark */ = {
@@ -1707,7 +1779,7 @@
 		isa = PBXTextBookmark;
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		rLen = 1;
-		rLoc = 128;
+		rLoc = 130;
 		rType = 1;
 	};
 	74A12FE01326D29E00D2BBEF /* PBXTextBookmark */ = {
@@ -1715,7 +1787,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 136";
 		rLen = 0;
-		rLoc = 2736;
+		rLoc = 2772;
 		rType = 0;
 		vrLen = 1184;
 		vrLoc = 2110;
@@ -1725,7 +1797,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 146";
 		rLen = 12;
-		rLoc = 3064;
+		rLoc = 3356;
 		rType = 0;
 		vrLen = 1184;
 		vrLoc = 2110;
@@ -1752,7 +1824,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 146";
 		rLen = 12;
-		rLoc = 3064;
+		rLoc = 3356;
 		rType = 0;
 		vrLen = 1256;
 		vrLoc = 2422;
@@ -1829,7 +1901,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 128";
 		rLen = 123;
-		rLoc = 2477;
+		rLoc = 2513;
 		rType = 0;
 		vrLen = 1209;
 		vrLoc = 2866;
@@ -2009,7 +2081,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 243";
 		rLen = 0;
-		rLoc = 5943;
+		rLoc = 6253;
 		rType = 0;
 		vrLen = 1002;
 		vrLoc = 735;
@@ -2255,7 +2327,7 @@
 		isa = PBXTextBookmark;
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		rLen = 1;
-		rLoc = 113;
+		rLoc = 115;
 		rType = 1;
 	};
 	74A1310913283D8700D2BBEF /* PBXTextBookmark */ = {
@@ -2263,7 +2335,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 194";
 		rLen = 0;
-		rLoc = 4561;
+		rLoc = 4871;
 		rType = 0;
 		vrLen = 1157;
 		vrLoc = 3042;
@@ -2272,7 +2344,7 @@
 		isa = PBXTextBookmark;
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		rLen = 1;
-		rLoc = 348;
+		rLoc = 365;
 		rType = 1;
 	};
 	74A1311413283E1000D2BBEF /* PBXTextBookmark */ = {
@@ -2280,7 +2352,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 338";
 		rLen = 0;
-		rLoc = 8438;
+		rLoc = 8748;
 		rType = 0;
 		vrLen = 941;
 		vrLoc = 9825;
@@ -2290,7 +2362,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 266";
 		rLen = 0;
-		rLoc = 6553;
+		rLoc = 6863;
 		rType = 0;
 		vrLen = 1215;
 		vrLoc = 2659;
@@ -2300,7 +2372,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 266";
 		rLen = 0;
-		rLoc = 6553;
+		rLoc = 6863;
 		rType = 0;
 		vrLen = 1129;
 		vrLoc = 2787;
@@ -2310,7 +2382,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 406";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1326;
 		vrLoc = 8951;
@@ -2320,7 +2392,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 406";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1280;
 		vrLoc = 8997;
@@ -2330,7 +2402,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 406";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1211;
 		vrLoc = 8920;
@@ -2340,7 +2412,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 407";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1149;
 		vrLoc = 9253;
@@ -2350,7 +2422,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 407";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1111;
 		vrLoc = 9304;
@@ -2360,7 +2432,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 405";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1134;
 		vrLoc = 9304;
@@ -2370,7 +2442,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 407";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1088;
 		vrLoc = 9356;
@@ -2380,7 +2452,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 406";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1252;
 		vrLoc = 9065;
@@ -2400,7 +2472,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 458";
 		rLen = 85;
-		rLoc = 13294;
+		rLoc = 13604;
 		rType = 0;
 		vrLen = 1350;
 		vrLoc = 10493;
@@ -2410,7 +2482,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 459";
 		rLen = 0;
-		rLoc = 13380;
+		rLoc = 13690;
 		rType = 0;
 		vrLen = 1348;
 		vrLoc = 10499;
@@ -2420,7 +2492,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 151";
 		rLen = 0;
-		rLoc = 3475;
+		rLoc = 3767;
 		rType = 0;
 		vrLen = 1351;
 		vrLoc = 10496;
@@ -2429,7 +2501,7 @@
 		isa = PBXTextBookmark;
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		rLen = 1;
-		rLoc = 557;
+		rLoc = 574;
 		rType = 1;
 	};
 	74A131571328467700D2BBEF /* PBXTextBookmark */ = {
@@ -2437,7 +2509,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 407";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1222;
 		vrLoc = 8741;
@@ -2447,7 +2519,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 407";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1343;
 		vrLoc = 8741;
@@ -2457,7 +2529,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 407";
 		rLen = 0;
-		rLoc = 10885;
+		rLoc = 11195;
 		rType = 0;
 		vrLen = 1299;
 		vrLoc = 8785;
@@ -2467,7 +2539,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 384";
 		rLen = 0;
-		rLoc = 9703;
+		rLoc = 10013;
 		rType = 0;
 		vrLen = 1318;
 		vrLoc = 7425;
@@ -2486,7 +2558,7 @@
 		isa = PBXTextBookmark;
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		rLen = 1;
-		rLoc = 557;
+		rLoc = 574;
 		rType = 1;
 	};
 	74A13167132849C000D2BBEF /* PBXTextBookmark */ = {
@@ -2494,7 +2566,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 361";
 		rLen = 0;
-		rLoc = 9251;
+		rLoc = 9561;
 		rType = 0;
 		vrLen = 1326;
 		vrLoc = 8120;
@@ -2514,7 +2586,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 345";
 		rLen = 0;
-		rLoc = 8571;
+		rLoc = 8881;
 		rType = 0;
 		vrLen = 1178;
 		vrLoc = 7770;
@@ -2524,7 +2596,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 357";
 		rLen = 13;
-		rLoc = 8948;
+		rLoc = 9258;
 		rType = 0;
 		vrLen = 1215;
 		vrLoc = 8648;
@@ -2534,7 +2606,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 430";
 		rLen = 0;
-		rLoc = 11100;
+		rLoc = 11410;
 		rType = 0;
 		vrLen = 1140;
 		vrLoc = 9532;
@@ -2544,7 +2616,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 430";
 		rLen = 0;
-		rLoc = 11100;
+		rLoc = 11410;
 		rType = 0;
 		vrLen = 1204;
 		vrLoc = 9569;
@@ -2663,7 +2735,7 @@
 		isa = PBXTextBookmark;
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		rLen = 1;
-		rLoc = 348;
+		rLoc = 365;
 		rType = 1;
 	};
 	74A1319A13284F1200D2BBEF /* PBXTextBookmark */ = {
@@ -2671,7 +2743,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 430";
 		rLen = 0;
-		rLoc = 11100;
+		rLoc = 11410;
 		rType = 0;
 		vrLen = 1335;
 		vrLoc = 9118;
@@ -2680,7 +2752,7 @@
 		isa = PBXTextBookmark;
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		rLen = 1;
-		rLoc = 503;
+		rLoc = 520;
 		rType = 1;
 	};
 	74A1319E1328503000D2BBEF /* PBXTextBookmark */ = {
@@ -2688,7 +2760,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 494";
 		rLen = 0;
-		rLoc = 12450;
+		rLoc = 12760;
 		rType = 0;
 		vrLen = 1398;
 		vrLoc = 10934;
@@ -2698,7 +2770,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 463";
 		rLen = 0;
-		rLoc = 11680;
+		rLoc = 11990;
 		rType = 0;
 		vrLen = 1017;
 		vrLoc = 10605;
@@ -2708,7 +2780,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 490";
 		rLen = 0;
-		rLoc = 12400;
+		rLoc = 12710;
 		rType = 0;
 		vrLen = 1317;
 		vrLoc = 10871;
@@ -2718,7 +2790,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 463";
 		rLen = 0;
-		rLoc = 11680;
+		rLoc = 11990;
 		rType = 0;
 		vrLen = 1059;
 		vrLoc = 10500;
@@ -2728,7 +2800,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 364";
 		rLen = 0;
-		rLoc = 9052;
+		rLoc = 9362;
 		rType = 0;
 		vrLen = 1117;
 		vrLoc = 8054;
@@ -2738,7 +2810,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 364";
 		rLen = 0;
-		rLoc = 9052;
+		rLoc = 9362;
 		rType = 0;
 		vrLen = 1109;
 		vrLoc = 8398;
@@ -2748,7 +2820,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 369";
 		rLen = 0;
-		rLoc = 9251;
+		rLoc = 9561;
 		rType = 0;
 		vrLen = 1132;
 		vrLoc = 8405;
@@ -2758,7 +2830,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 128";
 		rLen = 120;
-		rLoc = 2477;
+		rLoc = 2513;
 		rType = 0;
 		vrLen = 1138;
 		vrLoc = 6630;
@@ -2797,7 +2869,7 @@
 		isa = PBXTextBookmark;
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		rLen = 1;
-		rLoc = 348;
+		rLoc = 365;
 		rType = 1;
 	};
 	74A131BF1328579900D2BBEF /* PBXTextBookmark */ = {
@@ -2805,7 +2877,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 364";
 		rLen = 0;
-		rLoc = 9052;
+		rLoc = 9362;
 		rType = 0;
 		vrLen = 1136;
 		vrLoc = 8054;
@@ -2815,7 +2887,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 364";
 		rLen = 0;
-		rLoc = 9100;
+		rLoc = 9410;
 		rType = 0;
 		vrLen = 1158;
 		vrLoc = 8079;
@@ -2825,7 +2897,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 597";
 		rLen = 83;
-		rLoc = 14944;
+		rLoc = 15254;
 		rType = 0;
 		vrLen = 1386;
 		vrLoc = 14381;
@@ -2884,7 +2956,7 @@
 		isa = PBXTextBookmark;
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		rLen = 0;
-		rLoc = 429;
+		rLoc = 446;
 		rType = 1;
 	};
 	74A131D313285A9200D2BBEF /* PBXTextBookmark */ = {
@@ -2892,7 +2964,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 410";
 		rLen = 0;
-		rLoc = 10213;
+		rLoc = 10523;
 		rType = 0;
 		vrLen = 1283;
 		vrLoc = 9113;
@@ -2902,7 +2974,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 410";
 		rLen = 0;
-		rLoc = 10213;
+		rLoc = 10523;
 		rType = 0;
 		vrLen = 1322;
 		vrLoc = 9054;
@@ -2912,7 +2984,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 410";
 		rLen = 0;
-		rLoc = 10213;
+		rLoc = 10523;
 		rType = 0;
 		vrLen = 1264;
 		vrLoc = 9111;
@@ -2922,7 +2994,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 366";
 		rLen = 0;
-		rLoc = 9164;
+		rLoc = 9474;
 		rType = 0;
 		vrLen = 1054;
 		vrLoc = 8324;
@@ -2932,7 +3004,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 597";
 		rLen = 83;
-		rLoc = 14944;
+		rLoc = 15254;
 		rType = 0;
 		vrLen = 1474;
 		vrLoc = 14559;
@@ -2982,7 +3054,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 82";
 		rLen = 16;
-		rLoc = 1674;
+		rLoc = 1710;
 		rType = 0;
 		vrLen = 268;
 		vrLoc = 1469;
@@ -3245,16 +3317,16 @@
 	};
 	74E46BFC13213D4800CD578C /* beatdetect.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {278087, 635}}";
-			sepNavSelRange = "{44325, 5}";
-			sepNavVisRange = "{0, 48628}";
+			sepNavIntBoundsRect = "{{0, 0}, {4849, 676}}";
+			sepNavSelRange = "{3043, 0}";
+			sepNavVisRange = "{283, 2760}";
 		};
 	};
 	74E46BFD13213D4800CD578C /* beatdetect.c */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1426, 2899}}";
-			sepNavSelRange = "{3936, 14}";
-			sepNavVisRange = "{3881, 958}";
+			sepNavIntBoundsRect = "{{0, 0}, {1426, 2938}}";
+			sepNavSelRange = "{465, 34}";
+			sepNavVisRange = "{0, 1135}";
 		};
 	};
 	74E46C401321433E00CD578C /* PBXTextBookmark */ = {
@@ -3338,9 +3410,9 @@
 		fRef = 74E46BFC13213D4800CD578C /* beatdetect.h */;
 		name = "beatdetect.h: 20";
 		rLen = 0;
-		rLoc = 40062;
+		rLoc = 3043;
 		rType = 0;
-		vrLen = 48640;
+		vrLen = 3043;
 		vrLoc = 0;
 	};
 	74E46CCF13214D4F00CD578C /* PBXTextBookmark */ = {
@@ -3368,7 +3440,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 132";
 		rLen = 0;
-		rLoc = 2662;
+		rLoc = 2698;
 		rType = 0;
 		vrLen = 1129;
 		vrLoc = 2424;
@@ -3378,7 +3450,7 @@
 		fRef = 7486C3DC121B1C6F00600D39 /* BPMDetector.mm */;
 		name = "BPMDetector.mm: 168";
 		rLen = 0;
-		rLoc = 3897;
+		rLoc = 4207;
 		rType = 0;
 		vrLen = 1210;
 		vrLoc = 2858;

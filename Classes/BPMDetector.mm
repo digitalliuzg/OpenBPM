@@ -14,6 +14,8 @@
 #include <libkern/OSAtomic.h>
 #include <CoreFoundation/CFURL.h>
 
+#include <Accelerate/Accelerate.h>
+
 #import "beatdetect.h"
 
 #include <mach/machine.h>
@@ -137,13 +139,27 @@
 	
 	float * signal = (float*)malloc(sigLength * sizeof(float));
 	
-	
+	/*
 	for (int i = 0; i < sigLength; i++) {
 		
 		float sample = sampleBuffer[i]; 
 		signal[i] = sample / 32767.0f;
 		
 	}
+	*/
+	
+
+	//Converts an array of signed 16-bit integers to single-precision floating-point values.
+	
+	vDSP_Stride srcStride=1, dstStride=1;
+	
+	vDSP_vflt16 (
+					  sampleBuffer,
+					  srcStride,
+					  signal,
+					  dstStride,
+					  sigLength
+					  );
 	
 	
 	// testing how fast a memcpy is
@@ -181,7 +197,8 @@
 	
 	// this is a rudimentary BPM analyzer looking at the peaks... 
 	// uncomment to see beats in pink it thinks are useful...
-	// it's useless right now because the peaks seem all over the place.
+	// very in-efficient right now.
+	// also, it gets stuck in an infinite loop somewhere.
 	
 	/*
 	int currentWindowStart = sliceStartOffset;
@@ -203,7 +220,7 @@
 		currentWindowStart += windowIncrement;
 		
 	}
-	
+	*/
 	
 	sliceStartOffset += numSliceSamples;
 	int sliceSize = numSliceSamples;
@@ -212,7 +229,7 @@
 		NSLog(@"FINISHED SLICES in function");
 		//break;
 	}
-	*/
+	
 	
 }
 
