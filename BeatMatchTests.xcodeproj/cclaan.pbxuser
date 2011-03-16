@@ -124,6 +124,7 @@
 			743F74971331249000B5BC21 /* PBXTextBookmark */ = 743F74971331249000B5BC21 /* PBXTextBookmark */;
 			743F74981331249000B5BC21 /* PBXTextBookmark */ = 743F74981331249000B5BC21 /* PBXTextBookmark */;
 			743F74991331249000B5BC21 /* PBXTextBookmark */ = 743F74991331249000B5BC21 /* PBXTextBookmark */;
+			743F749D1331255200B5BC21 /* PBXTextBookmark */ = 743F749D1331255200B5BC21 /* PBXTextBookmark */;
 			7486C59A121B3EA800600D39 = 7486C59A121B3EA800600D39 /* PBXTextBookmark */;
 			7486C59E121B3EA800600D39 = 7486C59E121B3EA800600D39 /* PBXTextBookmark */;
 			7486C5F9121B463100600D39 = 7486C5F9121B463100600D39 /* PBXTextBookmark */;
@@ -400,6 +401,16 @@
 		rType = 0;
 		vrLen = 1238;
 		vrLoc = 0;
+	};
+	743F749D1331255200B5BC21 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
+		name = "beatdetect.c: 107";
+		rLen = 0;
+		rLoc = 2782;
+		rType = 0;
+		vrLen = 779;
+		vrLoc = 3867;
 	};
 	7486C3A0121B175000600D39 /* BeatMatchTests */ = {
 		isa = PBXExecutable;
@@ -883,7 +894,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 156";
 		rLen = 0;
-		rLoc = 3989;
+		rLoc = 3923;
 		rType = 0;
 		vrLen = 793;
 		vrLoc = 3032;
@@ -893,7 +904,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 156";
 		rLen = 0;
-		rLoc = 3989;
+		rLoc = 3923;
 		rType = 0;
 		vrLen = 822;
 		vrLoc = 3003;
@@ -1030,7 +1041,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 119";
 		rLen = 0;
-		rLoc = 3188;
+		rLoc = 3179;
 		rType = 0;
 		vrLen = 945;
 		vrLoc = 2564;
@@ -1049,7 +1060,7 @@
 		isa = PBXTextBookmark;
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		rLen = 0;
-		rLoc = 124;
+		rLoc = 123;
 		rType = 1;
 	};
 	74A12FB31326CFB500D2BBEF /* PBXTextBookmark */ = {
@@ -1057,7 +1068,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 119";
 		rLen = 0;
-		rLoc = 3158;
+		rLoc = 3149;
 		rType = 0;
 		vrLen = 866;
 		vrLoc = 2765;
@@ -1076,7 +1087,7 @@
 		isa = PBXTextBookmark;
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		rLen = 0;
-		rLoc = 124;
+		rLoc = 123;
 		rType = 1;
 	};
 	74A12FBA1326CFDA00D2BBEF /* PBXTextBookmark */ = {
@@ -1084,7 +1095,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 124";
 		rLen = 0;
-		rLoc = 3265;
+		rLoc = 3248;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 2892;
@@ -1104,7 +1115,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 123";
 		rLen = 0;
-		rLoc = 3236;
+		rLoc = 3219;
 		rType = 0;
 		vrLen = 782;
 		vrLoc = 3067;
@@ -1134,7 +1145,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 123";
 		rLen = 0;
-		rLoc = 3236;
+		rLoc = 3219;
 		rType = 0;
 		vrLen = 795;
 		vrLoc = 3067;
@@ -1144,7 +1155,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 126";
 		rLen = 0;
-		rLoc = 3313;
+		rLoc = 3272;
 		rType = 0;
 		vrLen = 752;
 		vrLoc = 2960;
@@ -1325,7 +1336,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 116";
 		rLen = 11;
-		rLoc = 2963;
+		rLoc = 2954;
 		rType = 0;
 		vrLen = 1087;
 		vrLoc = 2292;
@@ -1362,7 +1373,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 137";
 		rLen = 0;
-		rLoc = 3380;
+		rLoc = 3314;
 		rType = 0;
 		vrLen = 1068;
 		vrLoc = 2126;
@@ -1432,7 +1443,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 158";
 		rLen = 0;
-		rLoc = 3717;
+		rLoc = 3651;
 		rType = 0;
 		vrLen = 759;
 		vrLoc = 3126;
@@ -1442,7 +1453,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 157";
 		rLen = 0;
-		rLoc = 3715;
+		rLoc = 3649;
 		rType = 0;
 		vrLen = 909;
 		vrLoc = 2863;
@@ -1452,7 +1463,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 157";
 		rLen = 0;
-		rLoc = 3715;
+		rLoc = 3649;
 		rType = 0;
 		vrLen = 935;
 		vrLoc = 2867;
@@ -1502,7 +1513,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 157";
 		rLen = 0;
-		rLoc = 3715;
+		rLoc = 3649;
 		rType = 0;
 		vrLen = 934;
 		vrLoc = 2867;
@@ -1542,7 +1553,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 178";
 		rLen = 0;
-		rLoc = 4069;
+		rLoc = 4003;
 		rType = 0;
 		vrLen = 899;
 		vrLoc = 1937;
@@ -1602,7 +1613,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 178";
 		rLen = 0;
-		rLoc = 4069;
+		rLoc = 4003;
 		rType = 0;
 		vrLen = 1206;
 		vrLoc = 1691;
@@ -2852,9 +2863,9 @@
 	};
 	74E46BFD13213D4800CD578C /* beatdetect.c */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1426, 2431}}";
-			sepNavSelRange = "{2735, 0}";
-			sepNavVisRange = "{0, 1238}";
+			sepNavIntBoundsRect = "{{0, 0}, {1037, 3146}}";
+			sepNavSelRange = "{2782, 0}";
+			sepNavVisRange = "{3867, 779}";
 		};
 	};
 	74E46C401321433E00CD578C /* PBXTextBookmark */ = {
@@ -2948,7 +2959,7 @@
 		fRef = 74E46BFD13213D4800CD578C /* beatdetect.c */;
 		name = "beatdetect.c: 131";
 		rLen = 0;
-		rLoc = 3530;
+		rLoc = 3464;
 		rType = 0;
 		vrLen = 881;
 		vrLoc = 2804;

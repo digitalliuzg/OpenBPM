@@ -11,11 +11,6 @@
 #include "beatdetect.h"	// contains filters & example signals
 //#include "song.h"	// song sample
 
-#define ASCENDING	 1
-#define DESCENDING	-1
-
-#define SMOOTHING_LAG 5000	// 5000 samples ~0.25 sec ~ > 240BPM
-
 /*
 int main()
 {
@@ -56,19 +51,30 @@ void DoBeatDetect(float signal[], uint32_t signalLength, int *beats, int *num_be
 	// 5: smooth result?
 	// 6: get beat markers
 
-	float 			*result;
+	float 			*result, *temp, *peaks, mean;
 	vDSP_Length 	*indicies;
-	uint32_t		resultLength, i, j, k;
+	uint32_t		resultLength, tempLength, i, j, k;
 	vDSP_Stride		signalStride, resultStride;
+	int numPeaks, numBeats;
+	
 	
 	signalStride = resultStride = 1;
-	resultLength = signalLength;
+	resultLength = tempLength = signalLength / DECIMATION_FACTOR;
+	numPeaks = 30;
+	
 	
 	result = (float *) malloc(resultLength * sizeof(float));
 	memset(result, 0 , resultLength * sizeof(float));
-	indicies = (vDSP_Length *)malloc(resultLength * sizeof(vDSP_Length));
 
-	if (signal == NULL || result == NULL || indicies == NULL) {
+	temp = (float *) malloc(tempLength * sizeof(float));
+	memset(temp, 0 , tempLength * sizeof(float));
+
+	indicies = (vDSP_Length *)malloc(resultLength * sizeof(vDSP_Length));
+	
+	peaks = (float *) malloc(numPeaks * sizeof(float));
+	memset(peaks,0,numPeaks * sizeof(float));
+
+	if (signal == NULL || temp == NULL || result == NULL || indicies == NULL || peaks == NULL) {
         printf("\nmalloc failed to allocate memory for the result.\n");
         exit(0);
     }
@@ -77,24 +83,32 @@ void DoBeatDetect(float signal[], uint32_t signalLength, int *beats, int *num_be
 	{
 		indicies[i] = i;
 	}
-	
+
+#if DECIMATION_FACTOR > 1
 	//
 	// 1: decimate signal
 	//
-	//vDSP_desamp(signal, D, filter, result, resultLength / D, filterLength);
+	vDSP_desamp(signal, (vDSP_Stride)DECIMATION_FACTOR, decimFilter,
+				temp, (vDSP_Length)tempLength, decimFilterLength);
 
+#else
+	// bypass decimation
+	temp = signal;
+#endif
+	
 	//
 	// 2: differentiate signal
 	//
-	vDSP_vsub(signal+1,signalStride,signal,signalStride,result,resultStride,signalLength-1);
+	vDSP_vsub(temp+1,signalStride,temp,signalStride,result,resultStride,tempLength-1);
 
 	//
 	// 3: half-wave rectify signal
 	//
+	
 	//--vDSP_vthr(result,resultStride,zeros,result,resultStride,resultLength);
 	float zero = 0.0f;
 	
-	vDSP_vthr(signal,signalStride,&zero,result,resultStride,resultLength);
+	//vDSP_vthr(signal,signalStride,&zero,result,resultStride,resultLength);
 	
 //	for(i=0; i<resultLength; i++)
 //		printf("%f\n",result[i]);
@@ -107,27 +121,20 @@ void DoBeatDetect(float signal[], uint32_t signalLength, int *beats, int *num_be
 	peaks = (float *) malloc(numPeaks * sizeof(float));
 	memset(peaks,0,numPeaks * sizeof(float));
 	
+	vDSP_vthr(result,resultStride,&zero,result,resultStride,resultLength);
+				
 	//	
 	// 4: locate peaks
 	//
 
 	// get the X largest values
-	//vDSP_vsorti(result, indicies, NULL, resultLength, ASCENDING);
 	vDSP_vsorti(result, indicies, NULL, resultLength, DESCENDING);
 	for(i=0; i<numPeaks; i++)
 	{
 		peaks[i] = (float)indicies[i];	// do some kind of vector copy?
 	}
-	
-	//for(i=0; i<numPeaks; i++)
-	//	printf("%d\n",(int)peaks[i]);
 
 	vDSP_vsort(peaks, numPeaks, DESCENDING);
-
-	//for(i=0; i<numPeaks; i++)
-	//	printf("%d\n",(int)peaks[i]);
-	
-	//printf("----\n");
 	
 	//
 	// 5: smooth result?
@@ -152,20 +159,54 @@ void DoBeatDetect(float signal[], uint32_t signalLength, int *beats, int *num_be
 	
 	for(i=0; i<numPeaks; i++)
 	{
-		beats[numBeats++] = peaks[i];
+		beats[numBeats++] = peaks[i] * DECIMATION_FACTOR;
 	}
 	
-	
-//	printf("\nbeats:\n");
-//	for(i=0; i<numBeats; i++)
-//		printf("%d\n",beats[i]);
-
 	*num_beats = numBeats;
 	
 	free(peaks);
 	free(result);
+	free(temp);
 	free(indicies);
 	
+	return;
+}
+
+/**
+  * @brief - comb filterbank
+  */
+void CombFilterbank(const float signal[], uint32_t signalLength, int *bpm)
+{
+	static int Fs = 44100;
+	static int taps = 3;
+	float energy;
+	int N = (int)signalLength;
+	
+	float minbpm = 220.0;	// experimental BPM value
+	int M = floorf((float)(60.0/minbpm*(float)Fs));
+
+	float *temp;	// buffer for goodies
+	int tempLength = 2*M + signalLength - 1;
+
+	temp = (float *) malloc(tempLength * sizeof(float));
+
+	//y_n = x_n , 0 < n < N
+	memcpy(temp, signal, N * sizeof(float));
+	
+	//y_n = x_n-2M , N < n < 2M+N
+	memcpy(temp+N, signal+N-2*M, 2*M * sizeof(float));
+	
+	// y_n = y_n + x_n-M , M < n < M+N
+	vDSP_vadd(temp+M, (vDSP_Stride)1, signal, (vDSP_Stride)1, temp+M, (vDSP_Stride)1, N);
+	
+	// y_n = y_n + x_n-2M , 2M < n < N
+	vDSP_vadd(temp+2*M, (vDSP_Stride)1, signal, (vDSP_Stride)1, temp+2*M, (vDSP_Stride)1, N-2*M);
+	
+	vDSP_dotpr(temp, (vDSP_Stride)1, temp, (vDSP_Stride)1, &energy, tempLength);
+		
+
+	free(temp);
+
 	return;
 }
 
