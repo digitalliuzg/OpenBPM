@@ -62,6 +62,7 @@
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* BeatMatchTests_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeatMatchTests_Prefix.pch; sourceTree = "<group>"; };
+		53C73593133BB38A00639223 /* filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filters.h; path = Classes/filters.h; sourceTree = "<group>"; };
 		7486C3C6121B1C1200600D39 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		7486C3C8121B1C1200600D39 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7486C3CA121B1C1200600D39 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -188,6 +189,7 @@
 				74E46BFD13213D4800CD578C /* beatdetect.c */,
 				32CA4F630368D1EE00C91783 /* BeatMatchTests_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				53C73593133BB38A00639223 /* filters.h */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
