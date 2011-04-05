@@ -39,6 +39,12 @@ typedef struct BeatPair {
 } BeatPair;
 */
 
+typedef enum ViewMode {
+	VIEW_MODE_NORMAL,
+	VIEW_MODE_FOLLOW,
+	VIEW_MODE_CENTERED,
+} ViewMode;
+
 @interface GLViewController : UIViewController <GLViewDelegate>
 {
 	
@@ -78,8 +84,9 @@ typedef struct BeatPair {
 	AURenderCallbackStruct inputProc;
 	AudioUnit rioUnit;
 	
-	BOOL follow;
+	//BOOL follow;
 	
+	ViewMode viewMode;
 	
 }
 

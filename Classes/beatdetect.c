@@ -192,6 +192,17 @@ void FindPeaks(const float signal[], uint32_t signalLength, int *beats, int *num
 	//
 	// 3: half-wave rectify signal
 	//
+	
+	//--vDSP_vthr(result,resultStride,zeros,result,resultStride,resultLength);
+	float zero = 0.0f;
+	
+	//vDSP_vthr(signal,signalStride,&zero,result,resultStride,resultLength);
+	
+//	for(i=0; i<resultLength; i++)
+//		printf("%f\n",result[i]);
+//	exit(0);
+	
+	
 	vDSP_vthr(result,resultStride,&zero,result,resultStride,resultLength);
 	
 	//	

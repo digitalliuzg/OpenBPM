@@ -25,7 +25,7 @@ typedef struct BeatValues {
 
 typedef struct DetectedBeat {
 	
-	uint64_t songSampleIndex;
+	int64_t songSampleIndex;
 	float strength;
 	BOOL active;
 	Float64 distance;
@@ -78,6 +78,8 @@ typedef struct BeatPair {
 	DetectedBeat ** detectedBeatsInWindow;
 	
 	UInt64 numSongSamples;
+	
+	int64_t highestSample;
 	
 }
 

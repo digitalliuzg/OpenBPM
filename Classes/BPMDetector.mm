@@ -14,9 +14,12 @@
 #include <libkern/OSAtomic.h>
 #include <CoreFoundation/CFURL.h>
 
+#include <Accelerate/Accelerate.h>
+
 #import "beatdetect.h"
 
-
+#include <mach/machine.h>
+#import <mach/mach_time.h>
 
 #define BUFF_SIZE           2048
 
@@ -136,14 +139,48 @@
 	
 	float * signal = (float*)malloc(sigLength * sizeof(float));
 	
+	/*
 	for (int i = 0; i < sigLength; i++) {
 		
 		float sample = sampleBuffer[i]; 
 		signal[i] = sample / 32767.0f;
 		
 	}
+	*/
+	
+
+	//Converts an array of signed 16-bit integers to single-precision floating-point values.
+	
+	vDSP_Stride srcStride=1, dstStride=1;
+	
+	vDSP_vflt16 (
+					  sampleBuffer,
+					  srcStride,
+					  signal,
+					  dstStride,
+					  sigLength
+					  );
+	
+	
+	// testing how fast a memcpy is
+	//memcpy(signal , sampleBuffer , sigLength * sizeof(float) );
+	
+	
+	UInt64 startT = mach_absolute_time();
 	
 	DoBeatDetect(signal, sigLength, beats, &numDetected);
+	
+	UInt64 deltaT = mach_absolute_time() - startT;
+	
+	int * bpm;
+	
+	UInt64 startT2 = mach_absolute_time();
+	
+	//CombFilterbank(signal, sigLength, bpm);
+	
+	UInt64 deltaT2 = mach_absolute_time() - startT2;
+	
+	//--NSLog(@"Time for Beat Detect: %llu , time for Comb: %llu ", deltaT , deltaT2 );
 	
 	
 	for (int i = 0; i < numDetected; i++) {
@@ -160,7 +197,8 @@
 	
 	// this is a rudimentary BPM analyzer looking at the peaks... 
 	// uncomment to see beats in pink it thinks are useful...
-	// it's useless right now because the peaks seem all over the place.
+	// very in-efficient right now.
+	// also, it gets stuck in an infinite loop somewhere.
 	
 	/*
 	int currentWindowStart = sliceStartOffset;
@@ -182,7 +220,7 @@
 		currentWindowStart += windowIncrement;
 		
 	}
-	
+	*/
 	
 	sliceStartOffset += numSliceSamples;
 	int sliceSize = numSliceSamples;
@@ -191,7 +229,7 @@
 		NSLog(@"FINISHED SLICES in function");
 		//break;
 	}
-	*/
+	
 	
 }
 
@@ -335,12 +373,14 @@
 	if ( !detectedBeatsInWindow ) {
 		
 		//detectedBeatsInWindow = (DetectedBeat**)malloc( numBeats * sizeof(DetectedBeat*) );
-		detectedBeatsInWindow = (DetectedBeat**)malloc( 200 * sizeof(DetectedBeat*) );
+		detectedBeatsInWindow = (DetectedBeat**)malloc( 500 * sizeof(DetectedBeat*) );
 		
 	}
 	
 	memset(detectedBeatsInWindow,0, numBeats * sizeof(DetectedBeat*) );
 	numBeatsInWindow = 0;
+	
+	highestSample = 0;
 	
 	for (int i = 0; i < numBeats; i++) {
 		
@@ -351,16 +391,22 @@
 			numBeatsInWindow++;
 		}
 		
+		if ( beat->songSampleIndex > highestSample ) {
+			highestSample = beat->songSampleIndex;
+		}
+		
 	}
 	
-	//NSLog(@"found %i beats in the window" , numBeatsInWindow );
+	//NSLog(@"highest sample: %i" , highestSample );
 	
-	if ( numBeatsInWindow == 0 ) return;
+	NSLog(@"found %i beats in the window, total: %i " , numBeatsInWindow , numBeats );
+	
+	if ( numBeatsInWindow <= 1 ) return;
 	
 	//int numIterations = numBeats/4;
 	int numIterations = numBeatsInWindow-1;
-	float lowestBPM = 60;
-	float highestBPM = 190;
+	float lowestBPM = 50;
+	float highestBPM = 200;
 	
 	BeatPair minBeatPair;
 	
@@ -380,28 +426,49 @@
 	
 	for (int q = 0; q < numIterations; q++) {
 		
-		//int randomBeatIndex = (arc4random() % (numBeatsInWindow-2));
+		int randomBeatIndex;
+		int randomBeatIndex2;
+		DetectedBeat * beat1;
+		DetectedBeat * beat2;
 		
-		int randomBeatIndex = q;
-		randomBeatIndex = CLAMP(0,randomBeatIndex,numBeatsInWindow-2);
+		//beat1 = &detectedBeats[randomBeatIndex];
+		//beat2 = &detectedBeats[nextIndex];
 		
+		
+		int64_t d2;// = (int64_t)beat2->songSampleIndex - (int64_t)beat1->songSampleIndex;
+		double d1;// = fabsl(d2);
+		double diff;// = d1 / 44100.0;
+		double BPM;// = 60.0 / diff;
+		
+		BOOL validBpm = NO;
+		
+		while (!validBpm) {
+			
+			randomBeatIndex = (arc4random() % (numBeatsInWindow));
+			randomBeatIndex2 = (arc4random() % (numBeatsInWindow));
+			beat1 = detectedBeatsInWindow[randomBeatIndex];
+			beat2 = detectedBeatsInWindow[randomBeatIndex2];
+			
+			d2 = (int64_t)beat2->songSampleIndex - (int64_t)beat1->songSampleIndex;
+			d1 = fabsl(d2);
+			diff = d1 / 44100.0;
+			BPM = 60.0 / diff;
+	
+			if ( BPM >= lowestBPM && BPM <= highestBPM ) {
+				validBpm = YES;
+			}
+		}
+		
+		//int randomBeatIndex = q;
+		//randomBeatIndex = CLAMP(0,randomBeatIndex,numBeatsInWindow-2);		
 		//NSLog(@"chose random beat: %i out of %i - 2 " , randomBeatIndex , numBeatsInWindow );
 		
 		BOOL isInRange = YES;
 		BOOL isValidIndex = YES;
-		int nextIndex=randomBeatIndex+1;
+		//int nextIndex=randomBeatIndex+1;
+		//int nextIndex=randomBeatIndex2;
+		
 		int count = 0;
-		
-		//while ( count < 2 ) {
-		
-		//count++;
-		
-		DetectedBeat * beat1;
-		DetectedBeat * beat2;
-		beat1 = &detectedBeats[randomBeatIndex];
-		beat2 = &detectedBeats[nextIndex];
-		
-		float BPM = 60.0 / ((beat2->songSampleIndex - beat1->songSampleIndex) / 44100.0);
 		
 		if ( BPM >= lowestBPM && BPM <= highestBPM ) {
 			
@@ -410,7 +477,7 @@
 			
 			if ( err < minErr ) {
 				
-				//--NSLog(@"min err: %3.2f for BPM: %3.1f" , err , BPM );
+				//NSLog(@"min err: %3.2f for BPM: %3.1f" , err , BPM );
 				minErr = err;
 				minBeatPair.beat1 = *beat1;
 				minBeatPair.beat2 = *beat2;
@@ -450,7 +517,62 @@
 
 
 
+
 -(float) getErrorInSongFromBeats:(DetectedBeat*) b1 andBeat2:(DetectedBeat*) b2 {
+	
+	float accErr = 0.0;
+	
+	Float64 sampleDistance = fabsl(b2->songSampleIndex - b1->songSampleIndex);
+	
+	
+	
+	int lowI = - floorf( b1->songSampleIndex / sampleDistance );
+	int highI = floorf( (highestSample - b1->songSampleIndex) / sampleDistance );
+	
+	//int lowI = - floorf( (b1->songSampleIndex-currentBPMSearchWindowStartIndex) / sampleDistance );
+	//int highI = floorf( (currentBPMSearchWindowEndIndex - b1->songSampleIndex) / sampleDistance );
+	
+	//lowI -= 1;
+	//highI += 1;
+	
+	UInt64 beatSamplePosition;
+	
+	int totalI = (highI-lowI);
+	
+	//NSLog(@"checking low: %i to high: %i -- total: %i " , lowI, highI , (highI-lowI) );
+	
+	for (int I = (int)lowI; I <= (int)highI; I++) {
+		
+		beatSamplePosition = b1->songSampleIndex + sampleDistance * I;
+		Float64 minDistance = 100000;
+		
+		// maybe look only in detectedBeatsInWindow , thought it might find some on the boundaries of a window this way
+		for (int j = 0; j < numBeats; j++) {
+			
+			DetectedBeat * testBeat = &detectedBeats[j];
+			
+			// get the distance between the predicted place of a beat, and a beat that exists...
+			Float64 dist = fabs( beatSamplePosition - testBeat->songSampleIndex );
+			
+			if ( dist < minDistance ) {
+				minDistance = dist;
+			}
+			
+		}
+		
+		// add the closest beat's distance to the total error...
+		accErr += minDistance;
+		
+	}
+	
+	float avgError = accErr / (float)totalI;
+	
+	return avgError;
+	
+}
+
+
+-(float) getErrorInSongFromBeatsOLD:(DetectedBeat*) b1 andBeat2:(DetectedBeat*) b2 {
 	
 	
 	//   get the lowest and highest I values
@@ -462,7 +584,7 @@
 	float accErr = 0.0;
 	
 	
-	Float64 sampleDistance = (b2->songSampleIndex - b1->songSampleIndex);
+	Float64 sampleDistance = fabsl(b2->songSampleIndex - b1->songSampleIndex);
 	
 	//int lowI = - floorf( b1->songSampleIndex / sampleDistance );
 	//int highI = floorf( (numSongSamples - b1->songSampleIndex) / sampleDistance );
