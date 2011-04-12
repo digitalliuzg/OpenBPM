@@ -12,7 +12,10 @@
 
 #import "glStuff.h"
 
+#include "beatdetect.h"
+
 //#import "BPMDetector.h"
+#include <Accelerate/Accelerate.h>
 
 #ifndef CLAMP
 #define CLAMP(min,x,max) (x < min ? min : (x > max ? max : x))
@@ -75,7 +78,9 @@ static OSStatus	PerformThru(
 -(void) setupStuff {
 	
 	//player = [[AVAudioPlayer alloc] initWithData:<#(NSData *)data#> error:<#(NSError **)outError#>];
-			  
+	
+	bpm = 123.0f;
+				  
 	texWidth = 320;
 	texHeight = 480;
 	
@@ -140,7 +145,11 @@ static OSStatus	PerformThru(
 	[self.view addSubview:followButton];
 	
 	
-	
+	UIButton * bpmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	bpmButton.frame = CGRectMake(165, 20, 100, 30);
+	[bpmButton setTitle:@"123.4 BPM" forState:UIControlStateNormal];
+	[bpmButton addTarget:self action:@selector(bpmClicked:) forControlEvents:UIControlEventTouchDown];
+	[self.view addSubview:bpmButton];
 	
 }	
 
@@ -159,6 +168,12 @@ static OSStatus	PerformThru(
 
 -(void) centerClicked {
 	viewMode = VIEW_MODE_CENTERED;
+}
+
+-(void) bpmClicked:(id)sender {
+	//float bpm = EstimateTempo();
+	bpm++;
+	[sender setTitle:[NSString stringWithFormat:@"%4.1f BPM",bpm] forState:UIControlStateNormal];
 }
 
 -(void) initAudio {
@@ -852,7 +867,7 @@ static OSStatus	PerformThru(
 	*/
 	
 	int sliceStartOffset = 0;
-	int sliceSize = 44100 * 2;
+	int sliceSize = 44100 * 5;
 	int numSliceSamples = sliceSize;
 	//int offset = 0;
 	NSLog(@"starting");
@@ -863,7 +878,7 @@ static OSStatus	PerformThru(
 		
 		[bpmDetector addSamplesAndDetect:(sampleBuffer+sliceStartOffset) numFrames:numSliceSamples atSongOffset:sliceStartOffset];
 		
-		
+		NSLog(@"GLViewController::doBeatDetect::sliceOffset: %d",sliceStartOffset);
 		
 		if ( (sliceStartOffset + numSliceSamples) >= (numSongSamples-1) ) {
 			NSLog(@"FINISHED Outside");

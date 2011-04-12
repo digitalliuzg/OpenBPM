@@ -160,8 +160,9 @@
 					  dstStride,
 					  sigLength
 					  );
-	
-	
+	// normalize
+	float norm = 32768.0;
+	vDSP_vsdiv(signal, 1, &norm, signal, 1, sigLength);
 	// testing how fast a memcpy is
 	//memcpy(signal , sampleBuffer , sigLength * sizeof(float) );
 	

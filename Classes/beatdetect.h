@@ -48,6 +48,7 @@ static float hann[] = {
 	
 	
 void DoBeatDetect(float signal[], uint32_t signalLength, int beats[], int *num_beats);
+float EstimateTempo(void);
 void CombFilterbank(const float signal[], uint32_t signalLength, int *bpm);
 void GetMoments(float data[], int length, float *mean, float *var);
 

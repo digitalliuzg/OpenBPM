@@ -12,9 +12,16 @@
 #include "beatdetect.h"	// contains filters & example signals
 //#include "song.h"	// song sample
 //#include "filters.h"	// filters & signals
+//#include "filterbank.h"
 
 FFTSetup fft_weights;
 DSPSplitComplex spectrum, zeros;
+
+FFTSetupD fft_weightsD;
+DSPDoubleSplitComplex spectrumD, zerosD;
+double *signalD;
+
+int FRAME_OFFSET = -(int)(2.5*44100.0);	// temp for debugging
 
 /*
 int main()
@@ -52,6 +59,7 @@ void DoBeatDetect(float signal[], uint32_t signalLength, int *beats, int *num_be
 	// 4: differentiate / rectify
 	// 5: comb
 	
+	FRAME_OFFSET += (int)(2.5*44100.0);
 //	signal = noise;
 //	signalLength = noiseLength;
 	float* subband;
@@ -65,13 +73,19 @@ void DoBeatDetect(float signal[], uint32_t signalLength, int *beats, int *num_be
 	uint32_t log2n = (uint32_t)floorf(log2((double)signalLength));
 	vDSP_Length n = (vDSP_Length) 1 << log2n;
 
-	
 	// allocate mem for the spectrum
 	spectrum.realp = (float*)malloc(n/2*sizeof(float));
 	spectrum.imagp = (float*)malloc(n/2*sizeof(float));
+	
+	spectrumD.realp = (double*)malloc(n/2*sizeof(double));
+	spectrumD.imagp = (double*)malloc(n/2*sizeof(double));
+	signalD = (double*)malloc(n*sizeof(double));
 
 	zeros.realp = (float*)malloc(n/2*sizeof(float));
 	zeros.imagp = (float*)malloc(n/2*sizeof(float));
+	
+	zerosD.realp = (double*)malloc(n/2*sizeof(double));
+	zerosD.imagp = (double*)malloc(n/2*sizeof(double));
 	
 	// hanning window
 //	DSPSplitComplex fhann;
@@ -81,47 +95,69 @@ void DoBeatDetect(float signal[], uint32_t signalLength, int *beats, int *num_be
 	
 	float *result = (float*)malloc(n*sizeof(float));
 	float *subbands = (float*)malloc(numbands*n*sizeof(float));
+	float *subbandsD = (double*)malloc(numbands*n*sizeof(double));
 	
 	float *temp = (float*)malloc(n*sizeof(float));
 	
-	// get log2 of the dimension for Radix2 FFT
-	int dim = (int)log2((float)n);
-	
 	// setup the twiddle factors
-	fft_weights = vDSP_create_fftsetup(dim,kFFTRadix2);
+	fft_weights = vDSP_create_fftsetup(log2n,kFFTRadix2);
+	fft_weightsD = vDSP_create_fftsetupD(log2n,kFFTRadix2);
 	
-	Filterbank(signal, signalLength, subbands);
+	Filterbank(signal, signalLength, subbandsD);
+
+	/*
+	{
+		FILE* dump = fopen("/Users/wilperkins/Documents/Projects/openbpm/OpenBPM/log/debug.log", "w");
+		for (int i=0; i<6*n; i++) fprintf(dump,"%.20f\n",subbandsD[i]);
+		fclose(dump);
+	}
+	*/
+	//for(int i=0; i<6*n; i++) subbands[i] = (float)subbandsD[i];
 
 	// get the hanning window in the frequency domain
-	vDSP_ctoz((DSPComplex *)hann, 2, &zeros, 1, n/2);
-	vDSP_fft_zrip(fft_weights, &zeros, 1, dim, kFFTDirection_Forward);
-	
+	vDSP_ctoz((DSPComplex *)hann, 2, &zerosD, 1, n/2);
+	vDSP_fft_zrip(fft_weights, &zeros, 1, log2n, kFFTDirection_Forward);
+
 	for(int i=0; i<numbands; i++)
 	{
 		subband = subbands+i*n;
 		
+/*
+ {
+			FILE* dump = fopen("/Users/wilperkins/Documents/Projects/openbpm/OpenBPM/log/debug.log", "w");
+			for (int i=0; i<signalLength/2; i++) fprintf(dump,"%.20f\n",subband[i]);
+			fclose(dump);
+		}
+*/		
 		Smooth(subband, signalLength);
-//		{
-//			FILE* dump = fopen("/Users/wilperkins/Documents/Projects/openbpm/OpenBPM/log/debug.log", "w");
-//			for (int i=0; i<signalLength/2; i++) fprintf(dump,"%.20f\n",subband[i]);
-//			fclose(dump);
-//		}
 		
 		DiffRect(subband, signalLength);
 	}
-	int bpm;
-	CombFilterbank(subbands, signalLength, bpm);
+	int bpm = 0;
+	CombFilterbank(subbands, signalLength, &bpm);
 
-	FindPeaks(signal, signalLength, beats, num_beats);
+	printf("%d BPM\n",bpm);
+//	FindPeaks(signal, signalLength, beats, num_beats);
 	
 	free(spectrum.realp);
 	free(spectrum.imagp);
 	free(zeros.realp);
 	free(zeros.imagp);
+	
+	free(spectrumD.realp);
+	free(spectrumD.imagp);
+	free(zerosD.realp);
+	free(zerosD.imagp);
+	
 	free(temp);
 	free(result);
 	free(subbands);
 	return;
+}
+
+float EstimateTempo(void)
+{
+	return 678.9f;
 }
 
 /**
@@ -324,32 +360,45 @@ void CombFilterbank(const float signal[], uint32_t signalLength, int *bpm)
 /**
   * @brief - splits a signal into several subbands
   */
-void Filterbank(const float signal[], uint32_t signalLength, float subbands[])
+void Filterbank(const float signal[], uint32_t signalLength, double subbandsD[])
 {
-	uint32_t lbound, ubound, n;
+	uint32_t lbound, ubound;
 
-	n = 65536;
 	int numbands = 6;
-	//uint32_t maxfreq = 4096;
-	//uint32_t bandlimits[] = {0,200,400,800,1600,3200};
-	
 	uint32_t maxfreq = 22050;
 	uint32_t bandlimits[] = {0,1076,2153,4306,8613,17226};
 
+	uint32_t log2n = (uint32_t)floorf(log2((double)signalLength));
+	vDSP_Length n = (vDSP_Length) 1 << log2n;
 	
-	// get log2 of the dimension for Radix2 FFT
-	int dim = (int)log2((float)n);
-	
+	for(int i=0; i<n; i++) signalD[i] = (double)signal[i];
+
+	//uint32_t maxfreq = 4096;
+	//uint32_t bandlimits[] = {0,200,400,800,1600,3200};	
+		
 	lbound = ubound = 0;
-	n = signalLength;
 
 	//DSPSplitComplex _spectrum;
 	// pack real data into split complex vector
-	vDSP_ctoz((DSPComplex *)signal, 2, &spectrum, 1, n/2);
+	vDSP_ctozD((DSPDoubleComplex *)signalD, 2, &spectrumD, 1, n/2);
 	
-	vDSP_fft_zrip(fft_weights, &spectrum, 1, dim, kFFTDirection_Forward);
+	vDSP_fft_zripD(fft_weightsD, &spectrumD, 1, log2n, kFFTDirection_Forward);
 
-
+//	printf("|"); for(int j=0; j<10; j++) printf("%.20f, ",signalD[j]); printf("\n");
+/*
+	vDSP_conv(signal, (vDSP_Stride)1, FB1+30, (vDSP_Stride)-1, subbands, (vDSP_Stride)1, n, FB1Length);
+	vDSP_conv(signal, (vDSP_Stride)1, FB2+30, (vDSP_Stride)-1, subbands+n, (vDSP_Stride)1, n, FB2Length);
+	vDSP_conv(signal, (vDSP_Stride)1, FB3+30, (vDSP_Stride)-1, subbands+2*n, (vDSP_Stride)1, n, FB3Length);
+	vDSP_conv(signal, (vDSP_Stride)1, FB4+30, (vDSP_Stride)-1, subbands+3*n, (vDSP_Stride)1, n, FB4Length);
+	vDSP_conv(signal, (vDSP_Stride)1, FB5+30, (vDSP_Stride)-1, subbands+4*n, (vDSP_Stride)1, n, FB5Length);
+	
+	{
+		FILE* dump = fopen("/Users/wilperkins/Documents/Projects/openbpm/OpenBPM/log/debug.log", "w");
+		for (int i=0; i<5*n; i++) fprintf(dump,"%.20f\n",subbands[i]);
+		fclose(dump);
+	}
+	
+*/
 	// loop through the first n-1 subbands
 	for(int i=1; i<numbands; i++)
 	{
@@ -358,29 +407,38 @@ void Filterbank(const float signal[], uint32_t signalLength, float subbands[])
 		ubound = (uint32_t)floorf((float)bandlimits[i]/(float)maxfreq*(float)n);
 		
 		// copy sig[lbound].. sig[ubound] to zeros[lbound].. zeros[ubound]
-		memcpy(zeros.realp+lbound/2, spectrum.realp+lbound/2, (ubound-lbound)/2 * sizeof(float));
-		memcpy(zeros.imagp+lbound/2, spectrum.imagp+lbound/2, (ubound-lbound)/2 * sizeof(float));
+		memcpy(zerosD.realp+lbound/2, spectrumD.realp+lbound/2, (ubound-lbound)/2 * sizeof(double));
+		memcpy(zerosD.imagp+lbound/2, spectrumD.imagp+lbound/2, (ubound-lbound)/2 * sizeof(double));
 	
 		// ifft
-		vDSP_fft_zrip(fft_weights, &zeros, 1, dim, kFFTDirection_Inverse);
+		vDSP_fft_zripD(fft_weightsD, &zerosD, 1, log2n, kFFTDirection_Inverse);
 		
 		// unpack complex into real vector
-		vDSP_ztoc(&zeros, 1, (DSPComplex *)(subbands+(i-1)*n), 2, n/2);
+		vDSP_ztocD(&zerosD, 1, (DSPDoubleComplex *)(subbandsD+(i-1)*n), 2, n/2);
 				
+		//printf("||"); for(int j=0; j<10; j++) printf("%.20f, ",(subbandsD+(i-1)*n)[j]); printf("\n");
+		
 		//reset the buffer
-		memset(zeros.realp, 0 , n/2 * sizeof(float));
-		memset(zeros.imagp, 0 , n/2 * sizeof(float));		
+		memset(zerosD.realp, 0 , n/2 * sizeof(double));
+		memset(zerosD.imagp, 0 , n/2 * sizeof(double));	
+
 	}
+	
+//	{
+//		FILE* dump = fopen("/Users/wilperkins/Documents/Projects/openbpm/OpenBPM/log/debug.log", "w");
+//		for (int j=0; j<5*n; j++) fprintf(dump,"%.20f\n",subbandsD[j]);
+//		fclose(dump);
+//	}
 	
 	// get the last subband
 	ubound = n;
 	
-	memcpy(zeros.realp+lbound/2, spectrum.realp+lbound/2, (ubound-lbound)/2 * sizeof(float));
-	memcpy(zeros.imagp+lbound/2, spectrum.imagp+lbound/2, (ubound-lbound)/2 * sizeof(float));
+	memcpy(zerosD.realp+lbound/2, spectrumD.realp+lbound/2, (ubound-lbound)/2 * sizeof(double));
+	memcpy(zerosD.imagp+lbound/2, spectrumD.imagp+lbound/2, (ubound-lbound)/2 * sizeof(double));
 
 	// ifft & unpack
-	vDSP_fft_zrip(fft_weights, &zeros, 1, dim, kFFTDirection_Inverse);
-	vDSP_ztoc(&zeros, 1, (DSPComplex *)(subbands+5*n), 2, n/2);
+	vDSP_fft_zripD(fft_weightsD, &zerosD, 1, log2n, kFFTDirection_Inverse);
+	vDSP_ztocD(&zerosD, 1, (DSPDoubleComplex *)(subbandsD+5*n), 2, n/2);
 
 }
 
@@ -393,22 +451,23 @@ void Smooth(float signal[], uint32_t signalLength)
 	vDSP_vabs(signal, 1, signal, 1, signalLength);
 	
 	// get log2 of the dimension for Radix2 FFT
-	int dim = (int)log2((float)signalLength);
+	int log2n = (int)log2((float)signalLength);
+	vDSP_Length n = (vDSP_Length) 1 << log2n;
 		
 	// pack real data into split complex vector
-	vDSP_ctoz((DSPComplex *)signal, 2, &spectrum, 1, signalLength/2);
+	vDSP_ctoz((DSPComplex *)signal, 2, &spectrum, 1, n/2);
 	
 	// convert signal to frequency domain
-	vDSP_fft_zrip(fft_weights, &spectrum, 1, dim, kFFTDirection_Forward);
+	vDSP_fft_zrip(fft_weights, &spectrum, 1, log2n, kFFTDirection_Forward);
 	
 	// apply hanning window
-	vDSP_zvmul(&spectrum, 1, &zeros, 1, &spectrum, 1, signalLength/2, 1);
+	vDSP_zvmul(&spectrum, 1, &zeros, 1, &spectrum, 1, n/2, 1);
 	
 	// convert back to time domain
-	vDSP_fft_zrip(fft_weights, &spectrum, 1, dim, kFFTDirection_Inverse);
+	vDSP_fft_zrip(fft_weights, &spectrum, 1, log2n, kFFTDirection_Inverse);
 	
 	// unpack complex into real vector
-	vDSP_ztoc(&spectrum, 1, (DSPComplex *)signal, 2, signalLength/2);
+	vDSP_ztoc(&spectrum, 1, (DSPComplex *)signal, 2, n/2);
 }
 
 /**

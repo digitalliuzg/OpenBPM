@@ -72,6 +72,7 @@ typedef enum ViewMode {
 	DetectedBeat ** detectedBeatsInWindow;
 	*/
 	BPMDetector * bpmDetector;
+	float bpm;
 	
 	UInt64 numSongSamples;
 	

@@ -63,6 +63,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* BeatMatchTests_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeatMatchTests_Prefix.pch; sourceTree = "<group>"; };
 		53C73593133BB38A00639223 /* filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filters.h; path = Classes/filters.h; sourceTree = "<group>"; };
+		53F43009134F6087004B5967 /* filterbank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filterbank.h; path = Classes/filterbank.h; sourceTree = "<group>"; };
 		7486C3C6121B1C1200600D39 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		7486C3C8121B1C1200600D39 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7486C3CA121B1C1200600D39 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -185,6 +186,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				53F43009134F6087004B5967 /* filterbank.h */,
 				74E46BFC13213D4800CD578C /* beatdetect.h */,
 				74E46BFD13213D4800CD578C /* beatdetect.c */,
 				32CA4F630368D1EE00C91783 /* BeatMatchTests_Prefix.pch */,
